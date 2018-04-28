@@ -3,3 +3,4 @@ npm-debug.log
 shared/env.js
 .vscode
 .yarnclean
+.next
