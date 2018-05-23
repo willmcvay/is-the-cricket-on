@@ -1,0 +1,69 @@
+type Venue {
+	name: String!
+	location: String!
+}
+
+type UpcomingStats {
+	upcomingMatchCount: Int!
+	inProgressMatchCount: Int!
+	completedMatchCount: Int!
+}
+
+type Team {
+	isBatting: Boolean!
+	id: Int!
+	name: String!
+	shortName: String!
+	logoUrl: String!
+	teamColor: String!
+}
+
+type Series {
+	id: Int!
+	name: String!
+	shortName: String!
+	shieldImageUrl: String!
+}
+
+type Score {
+	homeScore: String!
+	homeOvers: String!
+	awayScore: String!
+	awayOvers: String!
+}
+
+type Match {
+	id: Int!
+	matchTypeId: Int!
+	series: Series!
+	name: String!
+	status: String!
+	venue: Venue!
+	homeTeam: Team!
+	awayTeam: Team!
+	currentMatchState: String!
+	isMultiDay: Boolean!
+	matchSummaryText: String!
+	scores: Score!
+	isMatchDrawn: Boolean!
+	isMatchAbandoned: Boolean!
+	winningTeamId: Int!
+	startDateTime: String!
+	endDateTime: String!
+	localStartDate: String!
+	localStartTime: String!
+	isWomensMatch: Boolean!
+}
+
+type UpcomingMatches {
+	meta: UpcomingStats!
+	matchList: [Match!]
+}
+
+type Query {
+	upcomingMatches(key: String!): UpcomingMatches!
+}
+
+type Mutation {
+	upcomingMatches(key: String!, value: UpcomingMatches!): Boolean!
+}

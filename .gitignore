@@ -4,3 +4,4 @@ shared/env.js
 .vscode
 .yarnclean
 .next
+.env

@@ -5,7 +5,7 @@ module.exports = {
 		browser: true,
 		jest: true
 	},
-	plugins: [ 'react', 'jsx-a11y', 'import' ],
+	plugins: [ 'react', 'jsx-a11y', 'import', 'graphql'],
 	rules: {
 		'max-len': [ 'error', 100 ],
 		'no-underscore-dangle': [ 'error', { allow: [ '_id' ] } ],

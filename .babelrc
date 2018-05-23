@@ -1,3 +1,4 @@
 {
-  "presets": ["env", "next/babel"]
+	"presets": [ "env", "flow", "next/babel" ],
+	"plugins": [ "inline-import-graphql-ast" ]
 }

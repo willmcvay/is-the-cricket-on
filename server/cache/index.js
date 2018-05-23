@@ -2,8 +2,10 @@
 
 import redis from 'redis'
 
-export default redis.createClient()
+const cache = redis.createClient()
 
 cache.on('connect', () => {
 	console.log('Redis Cache Connected')
 })
+
+export default cache
