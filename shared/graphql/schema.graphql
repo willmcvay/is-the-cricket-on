@@ -55,15 +55,15 @@ type Match {
 	isWomensMatch: Boolean!
 }
 
+type Matches {
+	matches: [Match!]
+}
+
 type UpcomingMatches {
 	meta: UpcomingStats!
-	matchList: [Match!]
+	matchList: Matches
 }
 
 type Query {
-	upcomingMatches(key: String!): UpcomingMatches!
-}
-
-type Mutation {
-	upcomingMatches(key: String!, value: UpcomingMatches!): Boolean!
+	upcomingMatches: UpcomingMatches!
 }

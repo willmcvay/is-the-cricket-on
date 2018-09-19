@@ -1,4 +1,4 @@
 {
-	"presets": [ "env", "flow", "next/babel" ],
-	"plugins": [ "inline-import-graphql-ast" ]
+	"presets": ["next/babel", "@zeit/next-typescript/babel"],
+	"plugins": ["import-graphql"]
 }

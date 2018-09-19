@@ -1,0 +1,13 @@
+query upcomingMatches {
+  upcomingMatches {
+    matchList {
+      matches {
+        matchTypeId
+        series {
+          name
+        }
+        name
+      }
+    }
+  }
+}
