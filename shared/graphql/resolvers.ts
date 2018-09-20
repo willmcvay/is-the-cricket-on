@@ -1,12 +1,8 @@
-import { getUpcomingMatches } from '../../server/api/upcomingMatches'
+import { getUpcomingMatches } from '../../server/api/upcoming-matches'
 
 const resolvers = {
   Query: {
-    upcomingMatches: async () => {
-      const response = await getUpcomingMatches()
-
-      return response.data
-    }
+    upcomingMatches: async () => getUpcomingMatches()
   }
 }
 

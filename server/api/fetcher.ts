@@ -1,17 +1,16 @@
-// @flow
-import axios from 'axios'
 import { HEADERS, BASE_API_URL } from '../../shared/constants/api-constants'
 
-const fetch = async (url: string) => {
+const get = async (url: string) => {
   try {
-    const res = await axios.get(`${BASE_API_URL}${url}`, {
+    const res = await fetch(`${BASE_API_URL}${url}`, {
       headers: HEADERS
     })
-    return res
+    const jsonVal = await res.json()
+    return jsonVal
 
   } catch (error) {
     console.error('API ERROR: ', error)
   }
 }
 
-export { fetch }
+export { get }

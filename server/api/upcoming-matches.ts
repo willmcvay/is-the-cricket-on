@@ -1,7 +1,6 @@
-// @flow
 import { MATCHES } from '../../shared/constants/api-constants'
-import { fetch } from './fetcher'
+import { get } from './fetcher'
 
-const getUpcomingMatches = () => fetch(MATCHES)
+const getUpcomingMatches = () => get(MATCHES)
 
 export { getUpcomingMatches }

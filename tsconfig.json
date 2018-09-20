@@ -15,10 +15,10 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"baseUrl": ".",
-		"typeRoots": [ "./node_modules/@types" ],
+		"typeRoots": ["./shared/types", "./node_modules/@types" ],
 		"lib": [ "dom", "es2015", "es2016" ]
 	},
 	"exclude": [
-			"node_modules"
+		"node_modules"
 	]
 }

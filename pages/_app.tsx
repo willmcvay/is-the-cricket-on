@@ -1,9 +1,14 @@
-import App, { Container } from 'next/app'
+import App, { Container, AppComponentProps } from 'next/app'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import withApollo from '../utils/with-apollo'
+import ApolloClient from 'apollo-boost'
 
-class MyApp extends App {
+type Props = AppComponentProps<any> & {
+  apollo: ApolloClient<any>
+}
+
+class MyApp extends App<Props> {
   render () {
     const { Component, pageProps, apollo } = this.props
     return (
