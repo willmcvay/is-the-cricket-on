@@ -21,4 +21,4 @@ class MyApp extends App<Props> {
   }
 }
 
-export default withApollo(MyApp)
+export default withApollo(MyApp as any)

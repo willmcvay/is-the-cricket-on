@@ -8,11 +8,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn clean-cache && nodemon server/index.ts --watch server --exec ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'",
-    "build": "NODE_ENV=production next build && tsc --project tsconfig.server.json",
+    "build": "NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json",
     "start": "NODE_ENV=production node .next/production-server/index.js",
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
     "precommit": "yarn lint",
-    "lint": "tslint --fix --project tsconfig.json --format stylish && prettier --write './**/*.{ts,tsx}'"
+    "lint": "tslint --fix --project tsconfig.json --format stylish && prettier --write './**/*.{ts,tsx}'",
+    "test": "jest --verbose --coverage",
+    "test-dev": "jest --watch"
   },
   "private": false,
   "dependencies": {
@@ -32,10 +34,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.1.0",
-    "@babel/preset-env": "7.1.0",
     "@babel/types": "7.0.0",
-    "@types/body-parser": "1.17.0",
+    "@types/enzyme": "3.1.14",
     "@types/express": "4.16.0",
+    "@types/jest": "23.3.2",
     "@types/next": "6.1.6",
     "@types/node": "10.10.1",
     "@types/react": "16.4.14",
@@ -43,9 +45,14 @@
     "@types/redis": "2.8.6",
     "@zeit/next-typescript": "1.1.1",
     "babel-loader": "8.0.2",
+    "babel-jest": "^23.6.0",
     "babel-plugin-import-graphql": "2.6.2",
+    "enzyme": "3.6.0",
+    "enzyme-adapter-react-16": "1.5.0",
+    "enzyme-to-json": "3.3.4",
     "graphql-tag": "2.9.2",
     "husky": "0.14.3",
+    "jest": "23.6.0",
     "nodemon": "1.18.4",
     "prettier": "1.14.3",
     "ts-node": "7.0.1",
@@ -55,5 +62,28 @@
     "tslint-plugin-prettier": "2.0.0",
     "typescript": "3.0.3",
     "typescript-babel-jest": "1.0.5"
+  },
+  "jest": {
+    "verbose": false,
+    "setupFiles": [
+      "./scripts/jest-setup.js"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "modulePathIgnorePatterns": [
+      "<rootDir>[/\\\\](next|node_modules)[/\\\\]"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testURL": "http://localhost/",
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/__tests__/stubs/"
+    ]
   }
 }
