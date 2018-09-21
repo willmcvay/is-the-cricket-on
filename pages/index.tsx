@@ -1,15 +1,16 @@
 import * as React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, ChildDataProps } from 'react-apollo'
 import upcomingMatches from '../shared/graphql/queries/upcoming-matches.graphql'
 
-const Index = (props) => {
+const Index = (props: ChildDataProps) => {
   console.log('PROPS', props)
+
   return (
     <div>
       <div>Hello World</div>
-      {props.children}
     </div>
   )
 }
 
-export default graphql(upcomingMatches)(Index)
+// second param response
+export default graphql<{}, {}>(upcomingMatches)(Index)

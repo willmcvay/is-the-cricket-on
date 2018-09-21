@@ -20,7 +20,7 @@ app.prepare().then(() => {
   serverApp.get('*', (req, res) => handle(req, res))
   serverApp.listen(port, (err) => {
     if (err) throw err
-    console.log('Server listening on port: ', port, '🚀')
+    console.log(`Server listening on port: ${port} 🚀`)
   })
 })
 

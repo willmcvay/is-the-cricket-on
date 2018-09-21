@@ -1,7 +1,5 @@
-import { DocumentNode } from 'graphql'
-// const DocumentNode = ('graphql').DocumentNode
-
 declare module "*.graphql" {
+  const DocumentNode = require('graphql').DocumentNode
   const value: DocumentNode;
   export default value;
 }
