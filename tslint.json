@@ -1,6 +1,15 @@
 {
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "prettier": true
+  },
   "extends": [
     "tslint-config-standard",
     "tslint-config-prettier"
-  ]
+  ],
+  "cliOptions": {
+    "exclude": [
+      "node_modules"
+    ]
+  }
 }

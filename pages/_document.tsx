@@ -4,9 +4,9 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import GlobalStyle from '../styles/global'
 
 class AppDocument extends Document {
-	render () {
-		return (
-			<html>
+  render() {
+    return (
+      <html>
         <Head>
           <meta
             name="viewport"
@@ -20,8 +20,8 @@ class AppDocument extends Document {
           <NextScript />
         </body>
       </html>
-		)
-	}
+    )
+  }
 }
 
 export default AppDocument

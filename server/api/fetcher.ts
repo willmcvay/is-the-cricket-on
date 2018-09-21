@@ -7,7 +7,6 @@ const get = async (url: string) => {
     })
     const jsonVal = await res.json()
     return jsonVal
-
   } catch (error) {
     console.error('API ERROR: ', error)
   }

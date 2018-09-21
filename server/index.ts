@@ -12,16 +12,21 @@ const port = process.env.PORT || 8000
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const serverApp = express()
-const serverApollo = new ApolloServer({ typeDefs, resolvers });
+const serverApollo = new ApolloServer({ typeDefs, resolvers })
 const cache = cacheInitialise()
 
-app.prepare().then(() => {
-  serverApollo.applyMiddleware({app: serverApp})
-  serverApp.get('*', (req, res) => handle(req, res))
-  serverApp.listen(port, (err) => {
-    if (err) throw err
-    console.log(`Server listening on port: ${port} 🚀`)
+app
+  .prepare()
+  .then(() => {
+    serverApollo.applyMiddleware({ app: serverApp })
+    serverApp.get('*', (req, res) => handle(req, res))
+    serverApp.listen(port, err => {
+      if (err) throw err
+      console.log(`Server listening on port: ${port} 🚀`)
+    })
   })
-})
+  .catch(err => {
+    throw err
+  })
 
 export { cache }

@@ -9,7 +9,7 @@ type Props = AppComponentProps<any> & {
 }
 
 class MyApp extends App<Props> {
-  render () {
+  render() {
     const { Component, pageProps, apollo } = this.props
     return (
       <Container>
