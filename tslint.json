@@ -3,6 +3,9 @@
   "rules": {
     "prettier": true
   },
+  "jsRules": {
+    "prettier": true
+  },
   "extends": [
     "tslint-config-standard",
     "tslint-config-prettier"
