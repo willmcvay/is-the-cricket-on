@@ -1,7 +1,7 @@
 import App, { Container, AppComponentProps } from 'next/app'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import withApollo from '../utils/with-apollo'
+import withApollo from '../components/hocs/with-apollo'
 import ApolloClient from 'apollo-boost'
 
 type Props = AppComponentProps<any> & {

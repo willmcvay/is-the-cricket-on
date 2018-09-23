@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { graphql, ChildDataProps } from 'react-apollo'
+import { graphql, ChildProps } from 'react-apollo'
 import upcomingMatches from '../shared/graphql/queries/upcoming-matches.graphql'
+import { Query } from '../shared/types/queries'
 
-export const HomePage = (props: ChildDataProps) => {
-  console.log('PROPS', props)
+export const HomePage = (props: ChildProps<{}, Query>) => {
+  console.log('PROPS', props.data!.upcomingMatches)
 
   return (
     <div>
@@ -12,5 +13,4 @@ export const HomePage = (props: ChildDataProps) => {
   )
 }
 
-// second param response
-export default graphql<{}, {}>(upcomingMatches)(HomePage)
+export default graphql<{}, Query, {}>(upcomingMatches)(HomePage)

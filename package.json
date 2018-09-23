@@ -11,7 +11,7 @@
     "build": "yarn generate-graphq && NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json",
     "start": "NODE_ENV=production node .next/production-server/index.js",
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
-    "precommit": "yarn lint",
+    "precommit": "yarn lint && git add .",
     "lint": "tslint --fix --project tsconfig.json --format stylish && prettier --write './**/*.{ts,tsx}'",
     "test": "jest --verbose --coverage",
     "test-dev": "jest --watch",

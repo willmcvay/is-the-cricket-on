@@ -3,7 +3,7 @@ import 'isomorphic-unfetch'
 import * as next from 'next'
 import * as express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import cacheInitialise from './cache'
+import cacheInitialise from './utils/initialise-cache'
 import typeDefs from '../shared/graphql/type-defs'
 import resolvers from '../shared/graphql/resolvers'
 
