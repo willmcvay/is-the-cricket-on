@@ -28,9 +28,6 @@ export type SubscriptionResolver<
   ): R | Result | Promise<R | Result>
 }
 
-/** The `Upload` scalar type represents a file upload promise that resolves an object containing `stream`, `filename`, `mimetype` and `encoding`. */
-export type Upload = any
-
 export interface Query {
   upcomingMatches: UpcomingMatches
 }
@@ -99,11 +96,6 @@ export interface Score {
   homeOvers: string
   awayScore: string
   awayOvers: string
-}
-
-export enum CacheControlScope {
-  PUBLIC = 'PUBLIC',
-  PRIVATE = 'PRIVATE'
 }
 
 export namespace QueryResolvers {

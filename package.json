@@ -7,8 +7,8 @@
   "author": "Will McVay <willmcvay@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn clean-cache && generate-graphql && nodemon server/index.ts --watch server --exec ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'",
-    "build": "generate-graphq && NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json",
+    "dev": "yarn clean-cache && yarn generate-graphql && nodemon server/index.ts --watch server --exec ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'",
+    "build": "yarn generate-graphq && NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json",
     "start": "NODE_ENV=production node .next/production-server/index.js",
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
     "precommit": "yarn lint",
@@ -16,8 +16,8 @@
     "test": "jest --verbose --coverage",
     "test-dev": "jest --watch",
     "generate-graphql": "yarn generate-schema && yarn generate-types",
-    "generate-types": "apollo-codegen generate shared/graphql/queries/**/*.graphql --schema shared/graphql/schema.json --target typescript --output ",
-    "generate-schema": "gql-gen --schema shared/graphql/schema.json --template graphql-codegen-typescript-template --out ./shared/types/queries.ts"
+    "generate-schema": "apollo-codegen introspect-schema shared/graphql/schema.graphql --output shared/graphql/schema.json",
+    "generate-types": "gql-gen --schema shared/graphql/schema.json --template graphql-codegen-typescript-template --out ./shared/types/queries.ts"
   },
   "private": false,
   "dependencies": {

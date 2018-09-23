@@ -3,3 +3,9 @@ declare module '*.graphql' {
   const value: DocumentNode
   export default value
 }
+
+declare interface AsyncIterator<T> {
+  next(value?: any): Promise<IteratorResult<T>>;
+  return?(value?: any): Promise<IteratorResult<T>>;
+  throw?(e?: any): Promise<IteratorResult<T>>;
+}
