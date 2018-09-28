@@ -1,22 +1,22 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
-import { HomePage } from '../../pages/index'
+import { HomePage } from '../index'
 import { DataProps } from 'react-apollo'
-import dataProps from '../stubs/data-props'
+import dataProps from '../../tests/stubs/data-props'
 
-describe('HomePage', function() {
+describe('HomePage', () => {
   const renderComponent = (updatedProps = {}) => {
     const props: DataProps<any, any> = {
       ...updatedProps,
       data: dataProps
     }
 
-    this.HomePage = shallow(<HomePage {...props} />)
+    return shallow(<HomePage {...props} />)
   }
 
   it('should match a snapshot', () => {
-    renderComponent()
-    expect(toJson(this.HomePage)).toMatchSnapshot()
+    const Component = renderComponent()
+    expect(toJson(Component)).toMatchSnapshot()
   })
 })

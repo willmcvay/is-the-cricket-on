@@ -46,15 +46,16 @@
     "@types/react-dom": "16.0.7",
     "@types/redis": "2.8.6",
     "@zeit/next-typescript": "1.1.1",
-    "apollo-codegen": "^0.20.2",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "8.0.2",
+    "apollo-codegen": "0.20.2",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "23.6.0",
+    "babel-loader": "8.0.4",
     "babel-plugin-import-graphql": "2.6.2",
     "enzyme": "3.6.0",
     "enzyme-adapter-react-16": "1.5.0",
     "enzyme-to-json": "3.3.4",
-    "graphql-code-generator": "^0.12.5",
-    "graphql-codegen-typescript-template": "^0.12.5",
+    "graphql-code-generator": "0.12.5",
+    "graphql-codegen-typescript-template": "0.12.5",
     "graphql-tag": "2.9.2",
     "husky": "0.14.3",
     "jest": "23.6.0",
@@ -87,8 +88,7 @@
     ],
     "testURL": "http://localhost/",
     "testPathIgnorePatterns": [
-      "<rootDir>/.next/",
-      "<rootDir>/__tests__/stubs/"
+      "<rootDir>/.next/"
     ]
   }
 }

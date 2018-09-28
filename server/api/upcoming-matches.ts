@@ -1,10 +1,9 @@
-import { MATCHES } from '../../shared/constants/api-constants'
-import { get } from '../utils/fetcher'
-import { Query } from 'shared/types/queries'
+import { MATCHES } from '../../shared/constants/api-keys'
+import { UPCOMING_MATCHES } from '../../shared/constants/cache-keys'
+import { Query } from '../../shared/types/queries'
+import dataGetter from '../utils/data-getter'
 
-const getUpcomingMatches = async (): Promise<Query | undefined> => {
-  const response = await get<Query>(MATCHES)
-  return response
-}
+const getUpcomingMatches = async (): Promise<Query | undefined> =>
+  dataGetter(MATCHES, UPCOMING_MATCHES)
 
 export { getUpcomingMatches }
