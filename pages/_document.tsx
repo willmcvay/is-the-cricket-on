@@ -1,7 +1,6 @@
-// @flow
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
-import GlobalStyle from '../styles/global'
+import BodyStyled from 'styles/base/global/body-styled'
 
 class AppDocument extends Document {
   render() {
@@ -14,11 +13,10 @@ class AppDocument extends Document {
           />
           <title>Is the Cricket on?</title>
         </Head>
-        <GlobalStyle />
-        <body>
+        <BodyStyled>
           <Main />
           <NextScript />
-        </body>
+        </BodyStyled>
       </html>
     )
   }

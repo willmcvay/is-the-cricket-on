@@ -1,7 +1,8 @@
 {
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    "prettier": true
+    "prettier": true,
+    "no-unused-expression": [true, "allow-tagged-template"]
   },
   "jsRules": {
     "prettier": true
