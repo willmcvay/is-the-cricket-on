@@ -5,7 +5,7 @@
 		"module": "commonjs",
 		"jsx": "preserve",
 		"strict": true,
-		"noImplicitAny": false,
+		"noImplicitAny": true,
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
 		"noUnusedLocals": true,

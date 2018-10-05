@@ -20,7 +20,7 @@ app
   .then(() => {
     serverApollo.applyMiddleware({ app: serverApp })
     serverApp.get('*', (req, res) => handle(req, res))
-    serverApp.listen(port, err => {
+    serverApp.listen(port, (err: Error) => {
       if (err) throw err
       console.log(`Server listening on port: ${port} 🚀`)
     })
