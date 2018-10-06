@@ -1,0 +1,12 @@
+query matchDetails {
+  matchDetails {
+    matchDetail {
+      matchSummary {
+        id
+        matchTypeId
+        name
+        status
+      }
+    }
+  }
+}

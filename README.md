@@ -2,11 +2,12 @@
 
 Needlessly over-engineered app to play around with interesting tech including;
 
-- Node, React, Express
 - TypeScript
-- Styled Components
+- Node, Express
+- React, NextJS
 - GraphQL, Apollo
 - Redis
+- Styled Components
 
 ## To run:
 

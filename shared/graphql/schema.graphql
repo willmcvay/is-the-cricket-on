@@ -9,13 +9,32 @@ type UpcomingStats {
 	completedMatchCount: Int!
 }
 
+type MatchStats {
+	hasFullScorecard: Boolean!
+	hasCompleted: Boolean!
+	hasCommentary: Boolean!
+	hasGraph: Boolean!
+	hasPlayerProfile: Boolean!
+	hasWagonWheel: Boolean!
+	currentBattingTeam: Int!
+	series: Series!
+	requiredRunRate: String!
+	currentRunRate: String!
+	matchName: String!
+	matchType:String!
+	venueName: String!
+	currentInningsId: Int!
+	currentDay: Int!
+}
+
 type Team {
 	isBatting: Boolean!
 	id: Int!
 	name: String!
 	shortName: String!
 	logoUrl: String!
-	teamColor: String!
+	teamColor: String
+	score: String
 }
 
 type Series {
@@ -30,6 +49,37 @@ type Score {
 	homeOvers: String!
 	awayScore: String!
 	awayOvers: String!
+}
+
+type Innings {
+	id: Int!
+	teamId: Int!
+	isDeclared: Boolean
+	name: String!
+	shortName: String!
+	wickets: String!
+	runs: String!
+	score: String!
+	overs: String!
+}
+
+type Batsmen {
+	name: String!
+	runs: String!
+	ballsFaced: String!
+	isFacing: Boolean!
+	strikeRate: String!
+	id: Int!
+}
+
+type Bowler {
+	name: String!
+	wickets: String!
+	runsAgainst: String!
+	bowlerOver: String!
+	economy: String!
+	strikeRate: String!
+	id: Int!
 }
 
 type Match {
@@ -53,10 +103,33 @@ type Match {
 	localStartDate: String!
 	localStartTime: String!
 	isWomensMatch: Boolean!
+	tossMessage: String
+	innings: [Innings]
+	currentBatters: [Batsmen]
+	bowler: Bowler
+}
+
+type Umpire {
+	name: String!
+}
+
+type Umpires {
+	firstUmpire: Umpire!
+	secondUmpire: Umpire!
+	thirdUmpire: Umpire!
+	referee: Umpire!
 }
 
 type Matches {
 	matches: [Match!]
+}
+
+type MatchDetail {
+	teamBatting: Team!
+	teamBowling: Team!
+	overs: [String]
+	umpires: Umpires!
+	matchSummary: Match!
 }
 
 type UpcomingMatches {
@@ -64,6 +137,12 @@ type UpcomingMatches {
 	matchList: Matches
 }
 
+type MatchDetails {
+	meta: MatchStats!
+	matchDetail: MatchDetail!
+}
+
 type Query {
 	upcomingMatches: UpcomingMatches!
+	matchDetails: MatchDetails!
 }
