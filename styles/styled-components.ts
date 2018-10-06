@@ -12,9 +12,7 @@ const {
   injectGlobal,
   keyframes,
   ThemeProvider
-} = styledComponents as styledComponents.ThemedStyledComponentsModule<
-  ThemeInterface
->
+} = styledComponents as styledComponents.ThemedStyledComponentsModule<ThemeInterface>
 
 export { css, injectGlobal, keyframes, ThemeProvider, ThemeInterface }
 

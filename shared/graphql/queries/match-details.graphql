@@ -1,5 +1,5 @@
-query matchDetails {
-  matchDetails {
+query matchDetails($matchid: String!, $seriesid: String!) {
+  matchDetails(matchid: $matchid, seriesid: $seriesid) {
     matchDetail {
       matchSummary {
         id

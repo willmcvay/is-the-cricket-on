@@ -13,8 +13,7 @@ export default {
           id: 1513,
           name: 'Tour of the West Indies',
           shortName: 'West Indies v Australia Test Series 2015',
-          shieldImageUrl:
-            'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
+          shieldImageUrl: 'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
         },
         name: '2nd Test',
         status: 'COMPLETED',
@@ -120,8 +119,7 @@ export default {
           id: 1448,
           name: 'Ashes Tour of the British Isles',
           shortName: 'England v Australia Test Series 2015',
-          shieldImageUrl:
-            'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
+          shieldImageUrl: 'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
         },
         name: '3rd Test',
         status: 'UPCOMING',
@@ -167,8 +165,7 @@ export default {
           id: 1448,
           name: 'Ashes Tour of the British Isles',
           shortName: 'England v Australia Test Series 2015',
-          shieldImageUrl:
-            'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
+          shieldImageUrl: 'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
         },
         name: '4th Test',
         status: 'UPCOMING',
@@ -214,8 +211,7 @@ export default {
           id: 1448,
           name: 'Ashes Tour of the British Isles',
           shortName: 'England v Australia Test Series 2015',
-          shieldImageUrl:
-            'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
+          shieldImageUrl: 'media/Logos/Series/2015/Ashes-Tour-of-British-Isles.ashx'
         },
         name: '5th Test',
         status: 'UPCOMING',

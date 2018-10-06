@@ -7,7 +7,8 @@ import { unixNow, cacheTimeExpired, unixDiffNow } from '../../shared/utils/time'
 
 const dataGetter = async (
   API_KEY: string,
-  CACHE_KEY: keyof typeof cacheKeys
+  CACHE_KEY: keyof typeof cacheKeys,
+  query?: string
 ): Promise<Query | undefined> => {
   try {
     const cached = await cache.asyncGet(CACHE_KEY)
@@ -15,15 +16,14 @@ const dataGetter = async (
       const parsedCache = JSON.parse(cached)
       const { cacheExpiry } = parsedCache
       const cacheValid =
-        cacheExpiry &&
-        !cacheTimeExpired(unixDiffNow(cacheExpiry), cacheExpiries[CACHE_KEY])
+        cacheExpiry && !cacheTimeExpired(unixDiffNow(cacheExpiry), cacheExpiries[CACHE_KEY])
 
       if (cacheValid) {
         console.log(`DATA FETCHED FROM CACHE FOR ${API_KEY} ${CACHE_KEY}`)
         return parsedCache
       }
     }
-    const response = await get<Query>(API_KEY)
+    const response = await get<Query>(API_KEY, query)
     const timeStampedResponse = { ...response, cacheExpiry: unixNow() }
     await cache.asyncSet(CACHE_KEY, timeStampedResponse)
     console.log(`DATA FETCHED FROM API AND CACHED FOR  ${API_KEY} ${CACHE_KEY}`)
