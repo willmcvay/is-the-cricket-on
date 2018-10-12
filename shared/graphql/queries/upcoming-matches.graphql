@@ -2,9 +2,11 @@ query upcomingMatches {
   upcomingMatches {
     matchList {
       matches {
+        id
         matchTypeId
         series {
           name
+          id
         }
         name
       }

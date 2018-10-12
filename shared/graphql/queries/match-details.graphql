@@ -6,6 +6,9 @@ query matchDetails($matchid: String!, $seriesid: String!) {
         matchTypeId
         name
         status
+        venue {
+          name
+        }
       }
     }
   }

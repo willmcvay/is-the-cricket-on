@@ -1,32 +1,16 @@
 import * as React from 'react'
-import { Query as ApolloQuery, ChildProps } from 'react-apollo'
-import matchDetails from '../shared/graphql/queries/match-details.graphql'
-import { Query } from 'shared/types/queries'
+import { ChildProps } from 'react-apollo'
+import { Query } from '../shared/types/queries'
 import { withRouter, WithRouterProps } from 'next/router'
+import MatchDetailsComponent from '../components/queries/match-details'
+import { QueryParams } from '../shared/types/api'
 
-export type RouterQuery = {
-  matchid: string
-  seriesid: string
-}
+export type MatchDetailsProps = ChildProps<{}, Query> & WithRouterProps<QueryParams.MatchDetails>
 
-export type MatchDetailsProps = ChildProps<{}, Query> & WithRouterProps<RouterQuery>
-
-export const MatchDetails = (props: MatchDetailsProps) => {
-  return (
-    <ApolloQuery
-      query={matchDetails}
-      variables={{
-        matchid: props.router.query ? props.router.query.matchid : '',
-        seriesid: props.router.query ? props.router.query.seriesid : ''
-      }}
-    >
-      {_props => (
-        <div>
-          <div>Match details</div>
-        </div>
-      )}
-    </ApolloQuery>
-  )
-}
+export const MatchDetails = (props: MatchDetailsProps) => (
+  <div>
+    <MatchDetailsComponent queryString={props.router.query as QueryParams.MatchDetails} />
+  </div>
+)
 
 export default withRouter(MatchDetails)

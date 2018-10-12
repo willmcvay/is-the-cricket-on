@@ -4,11 +4,13 @@ import { Query } from '../../shared/types/queries'
 import { cache } from '../index'
 import { get } from '../utils/fetcher'
 import { unixNow, cacheTimeExpired, unixDiffNow } from '../../shared/utils/time'
+import { stringMapToQuery } from '../../shared/utils/data'
+import { UtilityTypes } from '../../shared/types/utility'
 
 const dataGetter = async (
   API_KEY: string,
   CACHE_KEY: keyof typeof cacheKeys,
-  query?: string
+  query?: UtilityTypes.StringMap
 ): Promise<Query | undefined> => {
   try {
     const cached = await cache.asyncGet(CACHE_KEY)
@@ -23,7 +25,9 @@ const dataGetter = async (
         return parsedCache
       }
     }
-    const response = await get<Query>(API_KEY, query)
+    const queryString = query ? stringMapToQuery(query) : null
+
+    const response = await get<Query>(API_KEY, queryString)
     const timeStampedResponse = { ...response, cacheExpiry: unixNow() }
     await cache.asyncSet(CACHE_KEY, timeStampedResponse)
     console.log(`DATA FETCHED FROM API AND CACHED FOR  ${API_KEY} ${CACHE_KEY}`)

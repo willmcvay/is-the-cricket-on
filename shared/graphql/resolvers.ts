@@ -1,13 +1,11 @@
 import { getUpcomingMatches } from '../../server/api/upcoming-matches'
 import { getMatchDetails } from '../../server/api/match-details'
+import { QueryParams } from '../../shared/types/api'
 
 const resolvers = {
   Query: {
     upcomingMatches: async () => getUpcomingMatches(),
-    matchDetails: async (_obj: any, _args: any, _context: any, _info: any) => {
-      console.log(_obj, _args)
-      return getMatchDetails()
-    }
+    matchDetails: async (_obj: any, args: QueryParams.MatchDetails) => getMatchDetails(args)
   }
 }
 

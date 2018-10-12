@@ -1,14 +1,10 @@
 import * as React from 'react'
-import { graphql, ChildProps } from 'react-apollo'
-import upcomingMatches from '../shared/graphql/queries/upcoming-matches.graphql'
-import { Query } from '../shared/types/queries'
+import HomePageComponent from '../components/queries/home'
 
-export const HomePage = (_props: ChildProps<{}, Query>) => {
-  return (
-    <div>
-      <div>Hello World</div>
-    </div>
-  )
-}
+const HomePage = () => (
+  <div>
+    <HomePageComponent />
+  </div>
+)
 
-export default graphql<{}, Query, {}>(upcomingMatches)(HomePage)
+export default HomePage
