@@ -1,0 +1,9 @@
+query upcomingMatchStats {
+  upcomingMatchStats {
+    meta {
+      upcomingMatchCount
+      inProgressMatchCount
+      completedMatchCount
+    }
+  }
+}

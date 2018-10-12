@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, ChildProps } from 'react-apollo'
-import matchDetails from '../shared/graphql/queries/match-details.graphql'
+import matchDetails from '../../shared/graphql/queries/match-details.graphql'
 import { Query } from '../../shared/types/queries'
 import { QueryParams } from '../../shared/types/api'
 

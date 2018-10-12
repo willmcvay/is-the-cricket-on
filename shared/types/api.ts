@@ -5,4 +5,8 @@ export namespace QueryParams {
     matchid: string
     seriesid: string
   }
+
+  export interface MatchList {
+    status: 'UPCOMING' | 'COMPLETED' | 'INPROGRESS'
+  }
 }

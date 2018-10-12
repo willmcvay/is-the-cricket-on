@@ -13,6 +13,22 @@
           "description": "",
           "fields": [
             {
+              "name": "upcomingMatchStats",
+              "description": "",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UpcomingMatches",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "upcomingMatches",
               "description": "",
               "args": [],

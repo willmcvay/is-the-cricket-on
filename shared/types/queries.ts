@@ -24,6 +24,7 @@ export type SubscriptionResolver<Result, Parent = any, Context = any, Args = any
 }
 
 export interface Query {
+  upcomingMatchStats: UpcomingMatches
   upcomingMatches: UpcomingMatches
   matchDetails: MatchDetails
 }
@@ -178,10 +179,16 @@ export interface MatchDetailsQueryArgs {
 
 export namespace QueryResolvers {
   export interface Resolvers<Context = any> {
+    upcomingMatchStats?: UpcomingMatchStatsResolver<UpcomingMatches, any, Context>
     upcomingMatches?: UpcomingMatchesResolver<UpcomingMatches, any, Context>
     matchDetails?: MatchDetailsResolver<MatchDetails, any, Context>
   }
 
+  export type UpcomingMatchStatsResolver<
+    R = UpcomingMatches,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
   export type UpcomingMatchesResolver<R = UpcomingMatches, Parent = any, Context = any> = Resolver<
     R,
     Parent,

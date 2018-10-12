@@ -4,9 +4,30 @@ query upcomingMatches {
       matches {
         id
         matchTypeId
+        status
         series {
           name
           id
+        }
+        venue {
+          name
+          location
+        }
+        homeTeam {
+          id
+          name
+          logoUrl
+          teamColor
+          score
+          isBatting
+        }
+        awayTeam {
+          id
+          name
+          logoUrl
+          teamColor
+          score
+          isBatting
         }
         name
       }
