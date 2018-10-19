@@ -3,6 +3,7 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import withApollo from '../components/hocs/with-apollo'
 import ApolloClient from 'apollo-boost'
+import PageContainer from '../styles/base/layout/container'
 
 type Props = AppComponentProps<any> & {
   apollo: ApolloClient<any>
@@ -13,9 +14,11 @@ class MyApp extends App<Props> {
     const { Component, pageProps, apollo } = this.props
     return (
       <Container>
-        <ApolloProvider client={apollo}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <PageContainer>
+          <ApolloProvider client={apollo}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </PageContainer>
       </Container>
     )
   }

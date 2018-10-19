@@ -1,6 +1,6 @@
-import styled from '../../styled-components'
+import { injectGlobal } from '../../styled-components'
 
-export default styled.body`
+export default () => injectGlobal`
   div,
   span,
   applet,
@@ -125,9 +125,17 @@ export default styled.body`
     border-spacing: 0;
   }
 
-  display: block;
-  margin: 0;
-  font-family: 'Raleway', 'Helvetica', sans-serif;
-  line-height: 1;
-  font-size: 16px;
+  html {
+    display: flex;
+    margin: 0;
+    font-family: 'Raleway', 'Helvetica', sans-serif;
+    line-height: 1;
+    font-size: 16px;
+    width: 100%;
+  }
+
+  body {
+    width: 100%;
+    padding: 2rem;
+  }
 `

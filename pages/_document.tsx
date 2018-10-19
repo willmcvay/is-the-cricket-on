@@ -1,7 +1,7 @@
 import React from 'react'
 import Document, { Head, Main, NextScript, NextDocumentContext } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import BodyStyled from '../styles/base/global/body-styled'
+import globalStyles from '../styles/base/global/global'
 
 class AppDocument extends Document {
   static getInitialProps({ renderPage }: NextDocumentContext) {
@@ -22,11 +22,10 @@ class AppDocument extends Document {
           <title>Is the Cricket on?</title>
           <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
           {this.props.styleTags}
+          {globalStyles()}
         </Head>
-        <BodyStyled>
-          <Main />
-          <NextScript />
-        </BodyStyled>
+        <Main />
+        <NextScript />
       </html>
     )
   }
