@@ -7,6 +7,6 @@ export namespace QueryParams {
   }
 
   export interface MatchList {
-    status: 'UPCOMING' | 'COMPLETED' | 'INPROGRESS'
+    status: 'UPCOMING' | 'COMPLETED' | 'INPROGRESS' | 'LIVE'
   }
 }

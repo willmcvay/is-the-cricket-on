@@ -1,4 +1,5 @@
 import { injectGlobal } from '../../styled-components'
+import { paleGrey } from '../variables/colors'
 
 export default () => injectGlobal`
   div,
@@ -126,16 +127,16 @@ export default () => injectGlobal`
   }
 
   html {
-    display: flex;
-    margin: 0;
     font-family: 'Raleway', 'Helvetica', sans-serif;
     line-height: 1;
-    font-size: 16px;
+    font-size: 24px;
     width: 100%;
+    height: 100%;
   }
 
   body {
-    width: 100%;
-    padding: 2rem;
+    width: auto;
+    padding: 1rem;
+    background: ${paleGrey};
   }
 `

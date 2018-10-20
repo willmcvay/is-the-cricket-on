@@ -19,8 +19,11 @@ export const filterMatchList = (props: MatchListProps): Match[] | null => {
     return null
   }
   const { matches } = props.data.upcomingMatches.matchList
+  const { status } = props.queryString
 
-  return matches.filter(match => match.status === props.queryString.status)
+  return matches.filter(
+    match => (status === 'INPROGRESS' && match.status === 'LIVE') || match.status === status
+  )
 }
 
 export const MatchList = (props: MatchListProps) => {
