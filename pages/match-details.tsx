@@ -8,9 +8,7 @@ import { QueryParams } from '../shared/types/api'
 export type MatchDetailsProps = ChildProps<{}, Query> & WithRouterProps<QueryParams.MatchDetails>
 
 export const MatchDetails = (props: MatchDetailsProps) => (
-  <div>
-    <MatchDetailsComponent queryString={props.router.query as QueryParams.MatchDetails} />
-  </div>
+  <MatchDetailsComponent queryString={props.router.query as QueryParams.MatchDetails} />
 )
 
 export default withRouter(MatchDetails)

@@ -1,12 +1,24 @@
 import React from 'react'
-import Document, { Head, Main, NextScript, NextDocumentContext } from 'next/document'
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  NextDocumentContext,
+  RenderPageResponse
+} from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import globalStyles from '../styles/base/global/global'
 
-class AppDocument extends Document {
+interface DocumentProps extends RenderPageResponse {
+  styleTags: React.ReactElement<{}>[]
+}
+
+class AppDocument extends Document<DocumentProps> {
   static getInitialProps({ renderPage }: NextDocumentContext) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
+    const page = renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />) as React.ReactElement<any>
+    )
     const styleTags = sheet.getStyleElement()
     return { ...page, styleTags }
   }

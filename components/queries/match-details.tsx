@@ -8,7 +8,8 @@ type MatchDetailsProps = ChildProps<{}, Query> & {
   queryString: QueryParams.MatchDetails
 }
 
-export const MatchDetails = (_props: MatchDetailsProps) => {
+export const MatchDetails = (props: MatchDetailsProps) => {
+  console.log('PROPS ARE', props)
   return (
     <div>
       <div>Child</div>
@@ -19,5 +20,6 @@ export const MatchDetails = (_props: MatchDetailsProps) => {
 export default graphql<MatchDetailsProps, Query, {}>(matchDetails, {
   options: props => ({
     variables: props.queryString
-  })
+  }),
+  skip: props => !props.queryString.matchid || !props.queryString.seriesid
 })(MatchDetails)

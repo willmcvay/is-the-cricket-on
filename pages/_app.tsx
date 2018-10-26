@@ -6,7 +6,7 @@ import ApolloClient from 'apollo-boost'
 import PageContainer from '../styles/base/layout/container'
 import InnerContainer from '../styles/base/layout/inner-container'
 
-type Props = AppComponentProps<any> & {
+type Props = AppComponentProps & {
   apollo: ApolloClient<any>
 }
 

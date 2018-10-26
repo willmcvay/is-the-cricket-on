@@ -1,39 +1,36 @@
 import * as React from 'react'
 import { graphql, ChildProps } from 'react-apollo'
 import upcomingMatches from '../../shared/graphql/queries/upcoming-matches.graphql'
-import { Query, Match } from '../../shared/types/queries'
+import { Query } from '../../shared/types/queries'
 import { QueryParams } from '../../shared/types/api'
+import StyledHeader from '../../styles/base/layout/header'
+import { StyledH4 } from '../../styles/base/typeography/headings'
+import StyledNavBar from '../../styles/blocks/nav/nav-bar'
+import NavItem from '../../components/common/nav-item'
+import { HOME } from '../../shared/constants/routes'
+import { getStatusText } from '../../shared/utils/get-status-text'
+import { filterMatchList } from '../../shared/utils/filter-match-list'
+import MatchListItem from '../templates/match-list-item'
 
-type MatchListProps = ChildProps<{}, Query> & {
+export type MatchListProps = ChildProps<{}, Query> & {
   queryString: QueryParams.MatchList
-}
-
-export const filterMatchList = (props: MatchListProps): Match[] | null => {
-  if (
-    !props.data ||
-    !props.data.upcomingMatches ||
-    !props.data.upcomingMatches.matchList ||
-    !props.data.upcomingMatches.matchList.matches ||
-    !props.queryString.status
-  ) {
-    return null
-  }
-  const { matches } = props.data.upcomingMatches.matchList
-  const { status } = props.queryString
-
-  return matches.filter(
-    match => (status === 'INPROGRESS' && match.status === 'LIVE') || match.status === status
-  )
 }
 
 export const MatchList = (props: MatchListProps) => {
   const matches = filterMatchList(props)
   console.log(matches)
-  if (!matches) return matches
   return (
-    <div>
-      <div>Upcoming Matches Component for {props.queryString.status}</div>
-    </div>
+    <React.Fragment>
+      <StyledHeader>
+        <StyledH4>Matches {getStatusText(props)}</StyledH4>
+      </StyledHeader>
+      {matches.map(match => (
+        <MatchListItem key={match.id} {...match} />
+      ))}
+      <StyledNavBar>
+        <NavItem prefetch={true} pathname={HOME} displayText={'Home'} />
+      </StyledNavBar>
+    </React.Fragment>
   )
 }
 

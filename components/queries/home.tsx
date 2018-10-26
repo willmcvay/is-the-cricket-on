@@ -16,7 +16,7 @@ export const HomePage = (props: ChildProps<{}, Query>) => {
   const { inProgressMatchCount, upcomingMatchCount, completedMatchCount } = text
 
   return (
-    <div>
+    <React.Fragment>
       <StyledHeader>
         <StyledH1>{text.isThereCricketOn}</StyledH1>
         <StyledH4>{text.headerText}</StyledH4>
@@ -53,7 +53,7 @@ export const HomePage = (props: ChildProps<{}, Query>) => {
           )} completed`}
         />
       </StyledNavBar>
-    </div>
+    </React.Fragment>
   )
 }
 

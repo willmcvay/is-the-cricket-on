@@ -8,9 +8,7 @@ import { WithRouterProps, withRouter } from 'next/router'
 export type MatchListProps = ChildProps<{}, Query> & WithRouterProps<QueryParams.MatchList>
 
 const MatchList = (props: MatchListProps) => (
-  <div>
-    <MatchListComponent queryString={props.router.query as QueryParams.MatchList} />
-  </div>
+  <MatchListComponent queryString={props.router.query as QueryParams.MatchList} />
 )
 
 export default withRouter(MatchList)

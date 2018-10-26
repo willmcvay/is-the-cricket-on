@@ -5,6 +5,7 @@ const get = async <T>(url: string, query: string | null) => {
     const res = await fetch(`${BASE_API_URL}${url}${query ? query : ''}`, {
       headers: HEADERS
     } as RequestInit)
+    console.log('RES SATUS', res.status)
     const jsonVal = await res.json()
     return jsonVal as T
   } catch (error) {
