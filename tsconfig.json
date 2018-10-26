@@ -1,7 +1,7 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es6",
 		"module": "commonjs",
 		"jsx": "preserve",
 		"strict": true,
@@ -21,6 +21,8 @@
 	},
 	"exclude": [
 		"node_modules",
-		"__tests__"
+		"__tests__",
+		"next.config.js",
+		"scripts"
 	]
 }
