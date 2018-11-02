@@ -1,14 +1,13 @@
 import * as React from 'react'
-import MatchListComponent from '../components/queries/match-list'
+import MatchListQuery from '../components/query-providers/match-list'
 import { QueryParams } from '../shared/types/api'
-import { ChildProps } from 'react-apollo'
-import { Query } from '../shared/types/queries'
-import { WithRouterProps, withRouter } from 'next/router'
+import { withRouter } from 'next/router'
+import { Core } from '../shared/types/core'
 
-export type MatchListProps = ChildProps<{}, Query> & WithRouterProps<QueryParams.MatchList>
+export type MatchListProps = Core.ApolloWrappedRouterProps<QueryParams.MatchList>
 
 const MatchList = (props: MatchListProps) => (
-  <MatchListComponent queryString={props.router.query as QueryParams.MatchList} />
+  <MatchListQuery queryString={props.router.query as QueryParams.MatchList} />
 )
 
 export default withRouter(MatchList)

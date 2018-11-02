@@ -1,6 +1,6 @@
 import * as React from 'react'
-import HomePageComponent from '../components/queries/home'
+import HomePageQuery from '../components/query-providers/home'
 
-const HomePage = () => <HomePageComponent />
+const HomePage = () => <HomePageQuery />
 
 export default HomePage

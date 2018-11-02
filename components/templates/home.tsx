@@ -1,25 +1,26 @@
 import * as React from 'react'
-import { graphql, ChildProps } from 'react-apollo'
-import upcomingMatchStats from '../../shared/graphql/queries/upcoming-match-stats.graphql'
-import { Query } from '../../shared/types/queries'
 import { MATCH_LIST } from '../../shared/constants/routes'
 import { StyledH1, StyledH4 } from '../../styles/base/typeography/headings'
 import { pluralise } from '../../shared/utils/pluralise'
-import { getHeroText } from '../../shared/utils/hero-text'
 import NavItem from '../common/nav-item'
 import StyledNavBar from '../../styles/blocks/nav/nav-bar'
 import StyledHeader from '../../styles/base/layout/header'
+import { HomePageProps } from '../query-providers/home'
 
-export const HomePage = (props: ChildProps<{}, Query>) => {
-  const text = getHeroText(props)
-  if (!text) return text
-  const { inProgressMatchCount, upcomingMatchCount, completedMatchCount } = text
+export const HomePage = (props: HomePageProps) => {
+  const {
+    inProgressMatchCount,
+    upcomingMatchCount,
+    completedMatchCount,
+    isThereCricketOn,
+    headerText
+  } = props
 
   return (
     <React.Fragment>
       <StyledHeader>
-        <StyledH1>{text.isThereCricketOn}</StyledH1>
-        <StyledH4>{text.headerText}</StyledH4>
+        <StyledH1>{isThereCricketOn}</StyledH1>
+        <StyledH4>{headerText}</StyledH4>
       </StyledHeader>
       <StyledNavBar>
         <NavItem
@@ -57,4 +58,4 @@ export const HomePage = (props: ChildProps<{}, Query>) => {
   )
 }
 
-export default graphql<{}, Query, {}>(upcomingMatchStats)(HomePage)
+export default HomePage
