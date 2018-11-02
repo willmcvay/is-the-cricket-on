@@ -26,7 +26,7 @@ app
     })
   })
   .catch(err => {
-    throw err
+    console.log(err.message)
   })
 
 export { cache }

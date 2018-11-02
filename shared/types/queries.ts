@@ -74,8 +74,8 @@ export interface Match {
 export interface Series {
   id: number
   name: string
-  shortName: string
-  shieldImageUrl: string
+  shortName?: string | null
+  shieldImageUrl?: string | null
 }
 
 export interface Venue {
@@ -382,18 +382,18 @@ export namespace SeriesResolvers {
   export interface Resolvers<Context = any> {
     id?: IdResolver<number, any, Context>
     name?: NameResolver<string, any, Context>
-    shortName?: ShortNameResolver<string, any, Context>
-    shieldImageUrl?: ShieldImageUrlResolver<string, any, Context>
+    shortName?: ShortNameResolver<string | null, any, Context>
+    shieldImageUrl?: ShieldImageUrlResolver<string | null, any, Context>
   }
 
   export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
   export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
-  export type ShortNameResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type ShortNameResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
   >
-  export type ShieldImageUrlResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type ShieldImageUrlResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context

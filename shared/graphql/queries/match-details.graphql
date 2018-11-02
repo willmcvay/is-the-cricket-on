@@ -1,13 +1,109 @@
 query matchDetails($matchid: String!, $seriesid: String!) {
   matchDetails(matchid: $matchid, seriesid: $seriesid) {
+    meta {
+      hasFullScorecard
+      hasCompleted
+      hasCommentary
+      hasGraph
+      hasPlayerProfile
+      hasWagonWheel
+      currentBattingTeam
+      series {
+        id
+        name
+        shortName
+        shieldImageUrl
+      }
+      requiredRunRate
+      currentRunRate
+      matchName
+      matchType
+      venueName
+      currentInningsId
+      currentDay
+    }
     matchDetail {
+      teamBatting {
+        isBatting
+        id
+        name
+        shortName
+        logoUrl
+        teamColor
+        score
+      }
+      teamBowling {
+        isBatting
+        id
+        name
+        shortName
+        logoUrl
+        teamColor
+        score
+      }
+      overs
       matchSummary {
         id
         matchTypeId
         name
         status
+        homeTeam {
+          isBatting
+          id
+          name
+          shortName
+          logoUrl
+          teamColor
+          score
+        }
+        awayTeam {
+          isBatting
+          id
+          name
+          shortName
+          logoUrl
+          teamColor
+          score
+        }
+        currentMatchState
+        matchSummaryText
+        scores {
+          homeScore
+          homeOvers
+          awayScore
+          awayOvers
+        }
+        innings {
+          id
+          teamId
+          isDeclared
+          name
+          shortName
+          wickets
+          runs
+          score
+          overs
+        }
+        currentBatters {
+          name
+          runs
+          ballsFaced
+          isFacing
+          strikeRate
+          id
+        }
+        bowler {
+          name
+          wickets
+          runsAgainst
+          bowlerOver
+          economy
+          strikeRate
+          id
+        }
         venue {
           name
+          location
         }
       }
     }

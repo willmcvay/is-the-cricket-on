@@ -40,8 +40,8 @@ type Team {
 type Series {
 	id: Int!
 	name: String!
-	shortName: String!
-	shieldImageUrl: String!
+	shortName: String
+	shieldImageUrl: String
 }
 
 type Score {

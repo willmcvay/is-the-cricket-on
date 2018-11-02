@@ -5,12 +5,20 @@ import { Query } from '../../shared/types/queries'
 import { QueryParams } from '../../shared/types/api'
 import { Core } from '../../shared/types/core'
 import MatchDetailsComponent from '../templates/match-details'
+import { nullSafe } from '../../shared/utils/null-safe'
 
 export interface MatchDetailsProps extends Core.ApolloWrappedProps {
   queryString: QueryParams.MatchDetails
 }
 
-export const MatchDetails = (props: MatchDetailsProps) => <MatchDetailsComponent {...props} />
+export const MatchDetails = (props: MatchDetailsProps) => {
+  const matchDetail = nullSafe(null, p => p.data!.matchDetails!.matchDetail, props)
+  const meta = nullSafe(null, p => p.data!.matchDetails!.meta, props)
+
+  if (!matchDetail || !meta) return null
+
+  return <MatchDetailsComponent {...{ ...matchDetail, ...meta }} />
+}
 
 export default graphql<MatchDetailsProps, Query, {}>(matchDetails, {
   options: props => ({

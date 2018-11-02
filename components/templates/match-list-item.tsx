@@ -4,23 +4,25 @@ import TeamItem from './team-item'
 import Link from 'next/link'
 import { MATCH_DETAILS } from '../../shared/constants/routes'
 import { stringMapToQuery } from '../../shared/utils/data'
+import StyledA from '../../styles/base/elements/anchor'
+import StyledP from '../../styles/base/elements/paragraph'
 
 const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) => {
   const query = stringMapToQuery({
     seriesid: String(series.id),
     matchid: String(id)
   })
-  console.log('query', query)
+
   return (
     <React.Fragment>
       <Link prefetch href={`${MATCH_DETAILS}${query}`}>
-        <a href={`${MATCH_DETAILS}${query}`}>
-          <div>{name}</div>
-          <div>{series.name}</div>
-          <div>{venue.name}</div>
+        <StyledA href={`${MATCH_DETAILS}${query}`}>
+          <StyledP>
+            {name}, {series.name}, {venue.name}
+          </StyledP>
           <TeamItem {...homeTeam} />
           <TeamItem {...awayTeam} />
-        </a>
+        </StyledA>
       </Link>
     </React.Fragment>
   )

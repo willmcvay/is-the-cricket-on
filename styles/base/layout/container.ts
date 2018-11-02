@@ -11,6 +11,7 @@ const PageContainer = styled.div`
   height: 90vh;
   max-width: 100%;
   border-radius: ${layoutBorderRadius};
+  overflow: scroll;
 
   @media only screen and (min-width: ${tablet}) {
     max-width: 80%;

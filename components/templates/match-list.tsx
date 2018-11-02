@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Match } from '../../shared/types/queries'
 import StyledHeader from '../../styles/base/layout/header'
-import { StyledH4 } from '../../styles/base/typeography/headings'
+import { StyledH1 } from '../../styles/base/typeography/headings'
 import StyledNavBar from '../../styles/blocks/nav/nav-bar'
 import NavItem from '../common/nav-item'
 import { HOME } from '../../shared/constants/routes'
@@ -15,7 +15,7 @@ export interface MatchListComponentProps {
 export const MatchList = ({ statusText, matches }: MatchListComponentProps) => (
   <React.Fragment>
     <StyledHeader>
-      <StyledH4>Matches {statusText}</StyledH4>
+      <StyledH1>Matches {statusText}</StyledH1>
     </StyledHeader>
     {matches.map(match => (
       <MatchListItem key={match.id} {...match} />
