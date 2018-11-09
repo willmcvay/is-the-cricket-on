@@ -18,8 +18,8 @@ type MatchStats {
 	hasWagonWheel: Boolean!
 	currentBattingTeam: Int!
 	series: Series!
-	requiredRunRate: String!
-	currentRunRate: String!
+	requiredRunRate: String
+	currentRunRate: String
 	matchName: String!
 	matchType:String!
 	venueName: String!
@@ -30,9 +30,9 @@ type MatchStats {
 type Team {
 	isBatting: Boolean!
 	id: Int!
-	name: String!
-	shortName: String!
-	logoUrl: String!
+	name: String
+	shortName: String
+	logoUrl: String
 	teamColor: String
 	score: String
 }
@@ -94,7 +94,7 @@ type Match {
 	currentMatchState: String!
 	isMultiDay: Boolean!
 	matchSummaryText: String!
-	scores: Score!
+	scores: Score
 	isMatchDrawn: Boolean!
 	isMatchAbandoned: Boolean!
 	winningTeamId: Int!

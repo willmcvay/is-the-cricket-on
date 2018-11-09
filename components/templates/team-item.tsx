@@ -5,8 +5,8 @@ import StyledImage from '../../styles/base/elements/image'
 
 const TeamItem = ({ name, logoUrl }: Team) => (
   <StyledTeamItem>
-    <div>{name}</div>
-    <StyledImage src={logoUrl} />
+    <StyledImage src={logoUrl || ''} />
+    <span>{name}</span>
   </StyledTeamItem>
 )
 

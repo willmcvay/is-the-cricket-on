@@ -56,7 +56,7 @@ export interface Match {
   currentMatchState: string
   isMultiDay: boolean
   matchSummaryText: string
-  scores: Score
+  scores?: Score | null
   isMatchDrawn: boolean
   isMatchAbandoned: boolean
   winningTeamId: number
@@ -86,9 +86,9 @@ export interface Venue {
 export interface Team {
   isBatting: boolean
   id: number
-  name: string
-  shortName: string
-  logoUrl: string
+  name?: string | null
+  shortName?: string | null
+  logoUrl?: string | null
   teamColor?: string | null
   score?: string | null
 }
@@ -145,8 +145,8 @@ export interface MatchStats {
   hasWagonWheel: boolean
   currentBattingTeam: number
   series: Series
-  requiredRunRate: string
-  currentRunRate: string
+  requiredRunRate?: string | null
+  currentRunRate?: string | null
   matchName: string
   matchType: string
   venueName: string
@@ -273,7 +273,7 @@ export namespace MatchResolvers {
     currentMatchState?: CurrentMatchStateResolver<string, any, Context>
     isMultiDay?: IsMultiDayResolver<boolean, any, Context>
     matchSummaryText?: MatchSummaryTextResolver<string, any, Context>
-    scores?: ScoresResolver<Score, any, Context>
+    scores?: ScoresResolver<Score | null, any, Context>
     isMatchDrawn?: IsMatchDrawnResolver<boolean, any, Context>
     isMatchAbandoned?: IsMatchAbandonedResolver<boolean, any, Context>
     winningTeamId?: WinningTeamIdResolver<number, any, Context>
@@ -315,7 +315,11 @@ export namespace MatchResolvers {
     Parent,
     Context
   >
-  export type ScoresResolver<R = Score, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type ScoresResolver<R = Score | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
   export type IsMatchDrawnResolver<R = boolean, Parent = any, Context = any> = Resolver<
     R,
     Parent,
@@ -418,9 +422,9 @@ export namespace TeamResolvers {
   export interface Resolvers<Context = any> {
     isBatting?: IsBattingResolver<boolean, any, Context>
     id?: IdResolver<number, any, Context>
-    name?: NameResolver<string, any, Context>
-    shortName?: ShortNameResolver<string, any, Context>
-    logoUrl?: LogoUrlResolver<string, any, Context>
+    name?: NameResolver<string | null, any, Context>
+    shortName?: ShortNameResolver<string | null, any, Context>
+    logoUrl?: LogoUrlResolver<string | null, any, Context>
     teamColor?: TeamColorResolver<string | null, any, Context>
     score?: ScoreResolver<string | null, any, Context>
   }
@@ -431,13 +435,17 @@ export namespace TeamResolvers {
     Context
   >
   export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
-  export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
-  export type ShortNameResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type NameResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
   >
-  export type LogoUrlResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type ShortNameResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type LogoUrlResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
@@ -618,8 +626,8 @@ export namespace MatchStatsResolvers {
     hasWagonWheel?: HasWagonWheelResolver<boolean, any, Context>
     currentBattingTeam?: CurrentBattingTeamResolver<number, any, Context>
     series?: SeriesResolver<Series, any, Context>
-    requiredRunRate?: RequiredRunRateResolver<string, any, Context>
-    currentRunRate?: CurrentRunRateResolver<string, any, Context>
+    requiredRunRate?: RequiredRunRateResolver<string | null, any, Context>
+    currentRunRate?: CurrentRunRateResolver<string | null, any, Context>
     matchName?: MatchNameResolver<string, any, Context>
     matchType?: MatchTypeResolver<string, any, Context>
     venueName?: VenueNameResolver<string, any, Context>
@@ -663,12 +671,12 @@ export namespace MatchStatsResolvers {
     Context
   >
   export type SeriesResolver<R = Series, Parent = any, Context = any> = Resolver<R, Parent, Context>
-  export type RequiredRunRateResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type RequiredRunRateResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
   >
-  export type CurrentRunRateResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type CurrentRunRateResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context

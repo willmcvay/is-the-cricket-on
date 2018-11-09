@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { MATCH_LIST } from '../../shared/constants/routes'
 import { StyledH1, StyledH4 } from '../../styles/base/typeography/headings'
-import { pluralise } from '../../shared/utils/pluralise'
+import { pluralise } from '../../shared/utils/text'
 import NavItem from '../common/nav-item'
 import StyledNavBar from '../../styles/blocks/nav/nav-bar'
 import StyledHeader from '../../styles/base/layout/header'

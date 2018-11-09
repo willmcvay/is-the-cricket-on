@@ -1,5 +1,7 @@
 node_modules
 coverage
+dump.rdb
+.DS_Store
 .vscode
 .yarnclean
 .next

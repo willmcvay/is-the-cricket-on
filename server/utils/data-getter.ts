@@ -12,8 +12,10 @@ const dataGetter = async (
   CACHE_KEY: keyof typeof cacheKeys,
   query?: UtilityTypes.StringMap
 ): Promise<Query | undefined> => {
+  const queryString = query ? stringMapToQuery(query) : ''
+
   try {
-    const cached = await cache.asyncGet(CACHE_KEY)
+    const cached = await cache.asyncGet(CACHE_KEY, queryString)
     if (cached) {
       const parsedCache = JSON.parse(cached)
       const { cacheExpiry } = parsedCache
@@ -21,16 +23,15 @@ const dataGetter = async (
         cacheExpiry && !cacheTimeExpired(unixDiffNow(cacheExpiry), cacheExpiries[CACHE_KEY])
 
       if (cacheValid) {
-        console.log(`DATA FETCHED FROM CACHE FOR ${API_KEY} ${CACHE_KEY}`)
+        console.log(`DATA FETCHED FROM CACHE FOR ${API_KEY}${queryString} ${CACHE_KEY}`)
         return parsedCache
       }
     }
-    const queryString = query ? stringMapToQuery(query) : null
 
     const response = await get<Query>(API_KEY, queryString)
     const timeStampedResponse = { ...response, cacheExpiry: unixNow() }
-    await cache.asyncSet(CACHE_KEY, timeStampedResponse)
-    console.log(`DATA FETCHED FROM API AND CACHED FOR  ${API_KEY} ${CACHE_KEY}`)
+    await cache.asyncSet(CACHE_KEY, queryString, timeStampedResponse)
+    console.log(`DATA FETCHED FROM API AND CACHED FOR  ${API_KEY}${queryString} ${CACHE_KEY}`)
     return response
   } catch (err) {
     console.error(`ERROR GETTING DATA FOR ${API_KEY} ${CACHE_KEY}`)

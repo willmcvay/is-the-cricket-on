@@ -1,5 +1,5 @@
 import { injectGlobal } from '../../styled-components'
-import { paleGrey } from '../variables/colors'
+import { midGrey } from '../variables/colors'
 
 export default () => injectGlobal`
   div,
@@ -137,6 +137,6 @@ export default () => injectGlobal`
   body {
     width: auto;
     padding: 1rem;
-    background: ${paleGrey};
+    background: ${midGrey};
   }
 `

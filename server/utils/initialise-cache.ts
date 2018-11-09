@@ -12,10 +12,11 @@ export default () => {
   const set = util.promisify(cache.set).bind(cache)
   const get = util.promisify(cache.get).bind(cache)
 
-  const asyncSet = async <T>(key: keyof typeof cacheKeys, value: T) =>
-    set(key as string, JSON.stringify(value))
+  const asyncSet = async <T>(key: keyof typeof cacheKeys, queryString: string, value: T) =>
+    set(`${key}${queryString}`, JSON.stringify(value))
 
-  const asyncGet = async (key: keyof typeof cacheKeys) => get(key as string)
+  const asyncGet = async (key: keyof typeof cacheKeys, queryString: string) =>
+    get(`${key}${queryString}`)
 
   return { asyncSet, asyncGet }
 }

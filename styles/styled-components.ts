@@ -1,6 +1,6 @@
 import * as styledComponents from 'styled-components'
 
-interface ThemeInterface {
+export interface ThemeInterface {
   primaryColor: string
   secondaryColor: string
   isActive: boolean
@@ -14,6 +14,6 @@ const {
   ThemeProvider
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<ThemeInterface>
 
-export { css, injectGlobal, keyframes, ThemeProvider, ThemeInterface }
+export { css, injectGlobal, keyframes, ThemeProvider }
 
 export default styled

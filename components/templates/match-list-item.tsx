@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { MATCH_DETAILS } from '../../shared/constants/routes'
 import { stringMapToQuery } from '../../shared/utils/data'
 import StyledA from '../../styles/base/elements/anchor'
-import StyledP from '../../styles/base/elements/paragraph'
+import { StyledH6 } from '../../styles/base/typeography/headings'
+import { withComma } from '../../shared/utils/text'
 
 const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) => {
   const query = stringMapToQuery({
@@ -17,9 +18,11 @@ const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) =
     <React.Fragment>
       <Link prefetch href={`${MATCH_DETAILS}${query}`}>
         <StyledA href={`${MATCH_DETAILS}${query}`}>
-          <StyledP>
-            {name}, {series.name}, {venue.name}
-          </StyledP>
+          <StyledH6>
+            {withComma(name)}
+            {withComma(series.name)}
+            {venue.name}
+          </StyledH6>
           <TeamItem {...homeTeam} />
           <TeamItem {...awayTeam} />
         </StyledA>

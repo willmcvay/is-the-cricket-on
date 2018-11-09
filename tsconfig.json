@@ -15,9 +15,9 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"allowJs": true,
-		"baseUrl": ".",
-		"typeRoots": ["./shared/types", "./node_modules/@types" ],
-		"lib": [ "dom", "es2015", "es2016" ]
+		"baseUrl": "./",
+		"typeRoots": ["shared/types", "node_modules/@types" ],
+		"lib": [ "dom", "es2015", "es2016", "esnext.asynciterable" ]
 	},
 	"exclude": [
 		"node_modules",

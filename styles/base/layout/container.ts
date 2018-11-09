@@ -1,12 +1,12 @@
 import styled from '../../styled-components'
 import { tablet, largeDesktop } from '../variables/media-widths'
-import { midGrey } from '../variables/colors'
+import { white } from '../variables/colors'
 import { layoutBorderRadius } from '../variables/layout'
 
 const PageContainer = styled.div`
   margin: 0 auto;
   display: flex;
-  background: ${midGrey};
+  background: ${white};
   padding: 1rem;
   height: 90vh;
   max-width: 100%;
