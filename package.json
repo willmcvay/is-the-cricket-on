@@ -11,8 +11,9 @@
   },
   "scripts": {
     "dev": "yarn clean-cache && yarn generate-graphql && nodemon server/index.ts --watch server --exec ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'",
-    "build": "yarn generate-graphql && NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json",
+    "build": "yarn generate-graphql && NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json && yarn copy-schema",
     "start": "NODE_ENV=production node .next/production-server/server/index.js",
+    "copy-schema": "cp -R ./shared/graphql/schema.graphql  ./.next/production-server/shared/graphql",
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
     "precommit": "yarn lint && git add .",
     "lint": "tslint --fix --project tsconfig.json --format stylish && prettier --write './**/*.{ts,tsx}'",

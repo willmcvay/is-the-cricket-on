@@ -23,6 +23,7 @@
 		"node_modules",
 		"__tests__",
 		"next.config.js",
-		"scripts"
+		"scripts",
+		"coverage"
 	]
 }
