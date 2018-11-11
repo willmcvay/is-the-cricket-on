@@ -3,7 +3,12 @@ import * as util from 'util'
 import * as cacheKeys from 'shared/constants/cache-keys'
 
 export default () => {
-  const cache = redis.createClient()
+  const cache =
+    process.env.NODE_ENV === 'production'
+      ? redis.createClient({
+          url: process.env.REDIS_URL
+        })
+      : redis.createClient()
 
   cache.on('connect', () => {
     console.log('Redis Cache Connected')
