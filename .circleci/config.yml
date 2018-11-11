@@ -22,7 +22,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-  build_chart:
   deploy:
     docker:
       - image: circleci/node:10
