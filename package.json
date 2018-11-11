@@ -12,7 +12,8 @@
   "scripts": {
     "dev": "yarn clean-cache && yarn generate-graphql && nodemon server/index.ts --watch server --exec ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'",
     "build": "yarn generate-graphql && NODE_ENV=production next build && tsc --project scripts/tsconfig.server.json && yarn copy-schema",
-    "start": "yarn build && NODE_ENV=production node .next/production-server/server/index.js",
+    "start-app": "NODE_ENV=production node .next/production-server/server/index.js",
+    "start": "yarn build && yarn start-app",
     "copy-schema": "cp -R ./shared/graphql/schema.graphql  ./.next/production-server/shared/graphql",
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
     "precommit": "yarn lint && git add .",
@@ -20,8 +21,8 @@
     "test": "jest --verbose --coverage",
     "test-dev": "jest --watch",
     "generate-graphql": "yarn generate-schema && yarn generate-types",
-    "generate-schema": "apollo-codegen introspect-schema shared/graphql/schema.graphql --output shared/graphql/schema.json",
-    "generate-types": "gql-gen --schema shared/graphql/schema.json --template graphql-codegen-typescript-template --out ./shared/types/queries.ts"
+    "generate-schema": "yarn apollo-codegen introspect-schema shared/graphql/schema.graphql --output shared/graphql/schema.json",
+    "generate-types": "yarn gql-gen --schema shared/graphql/schema.json --template graphql-codegen-typescript-template --out ./shared/types/queries.ts"
   },
   "private": false,
   "dependencies": {
