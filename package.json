@@ -16,6 +16,7 @@
     "copy-schema": "cp -R ./shared/graphql/schema.graphql  ./.next/production-server/shared/graphql",
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
     "precommit": "yarn lint && git add .",
+    "postinstall": "yarn build",
     "lint": "tslint --fix --project tsconfig.json --format stylish && prettier --write './**/*.{ts,tsx}'",
     "test": "jest --verbose --coverage",
     "test-dev": "jest --watch",
