@@ -21,8 +21,8 @@
     "test": "jest --verbose --coverage",
     "test-dev": "jest --watch",
     "generate-graphql": "yarn generate-schema && yarn generate-types",
-    "generate-schema": "yarn apollo-codegen introspect-schema shared/graphql/schema.graphql --output shared/graphql/schema.json",
-    "generate-types": "yarn gql-gen --schema shared/graphql/schema.json --template graphql-codegen-typescript-template --out ./shared/types/queries.ts"
+    "generate-schema": "$(npm bin)/apollo-codegen introspect-schema shared/graphql/schema.graphql --output shared/graphql/schema.json",
+    "generate-types": "$(npm bin)/gql-gen --schema shared/graphql/schema.json --template graphql-codegen-typescript-template --out ./shared/types/queries.ts"
   },
   "private": false,
   "dependencies": {
