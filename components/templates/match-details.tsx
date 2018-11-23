@@ -5,9 +5,11 @@ import StyledHeader from '../../styles/base/layout/header'
 import StyledNavBar from '../../styles/blocks/nav/nav-bar'
 import NavItem from '../common/nav-item'
 import { HOME, MATCH_LIST } from '../../shared/constants/routes'
+import TeamScoreSummary from './team-score-summary'
 
 const MatchDetails = ({ matchSummary }: MatchDetail & MatchStats) => {
-  const { homeTeam, awayTeam, matchSummaryText, currentMatchState } = matchSummary
+  const { homeTeam, awayTeam, matchSummaryText, currentMatchState, scores } = matchSummary
+
   return (
     <React.Fragment>
       <StyledHeader>
@@ -16,6 +18,8 @@ const MatchDetails = ({ matchSummary }: MatchDetail & MatchStats) => {
           {homeTeam.name} vs {awayTeam.name}
         </StyledH4>
         <StyledH6>{matchSummaryText}</StyledH6>
+        <TeamScoreSummary team={homeTeam} scores={scores} isHome={true} />
+        <TeamScoreSummary team={awayTeam} scores={scores} isHome={false} />
       </StyledHeader>
       <StyledNavBar>
         <NavItem prefetch pathname={HOME} displayText={'Home'} />

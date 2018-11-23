@@ -7,7 +7,6 @@ import Document, {
   RenderPageResponse
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import globalStyles from '../styles/base/global/global'
 
 interface DocumentProps extends RenderPageResponse {
   styleTags: React.ReactElement<{}>[]
@@ -34,7 +33,6 @@ class AppDocument extends Document<DocumentProps> {
           <title>Is the Cricket on?</title>
           <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
           {this.props.styleTags}
-          {globalStyles()}
         </Head>
         <Main />
         <NextScript />

@@ -26,11 +26,6 @@ export const HomePageProvider = (props: Core.ApolloWrappedProps) => {
   const childProps = getChildProps(props)
   if (!childProps) return childProps
 
-  if (!process.browser) {
-    console.log('AM ON THE SERVER', childProps)
-  } else {
-    console.log('AM ON THE CLIENT', childProps)
-  }
   return <HomePage {...childProps} />
 }
 
