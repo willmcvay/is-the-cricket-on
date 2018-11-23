@@ -11,7 +11,7 @@ jobs:
           - v1-dependencies-
       - run:
           name: Install dependencies
-          command: yarn
+          command: yarn install --production=false
       - run:
           name: Run linter
           command: yarn lint
