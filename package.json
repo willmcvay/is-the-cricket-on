@@ -18,7 +18,7 @@
     "clean-cache": "rm -rf ./node_modules/.cache && rm -rf ./cache-loader",
     "precommit": "yarn lint && git add .",
     "lint": "tslint --fix --project tsconfig.json --format stylish && prettier --write './**/*.{ts,tsx}'",
-    "test": "jest --verbose --coverage",
+    "test": "NODE_ENV=test jest --verbose --coverage",
     "test-dev": "jest --watch",
     "generate-graphql": "yarn generate-schema && yarn generate-types",
     "generate-schema": "$(npm bin)/apollo-codegen introspect-schema shared/graphql/schema.graphql --output shared/graphql/schema.json",
