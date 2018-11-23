@@ -87,7 +87,7 @@
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
     "modulePathIgnorePatterns": [
-      "<rootDir>[/\\\\](next|node_modules)[/\\\\]"
+      "<rootDir>[/\\\\](.next|node_modules)[/\\\\]"
     ],
     "moduleFileExtensions": [
       "ts",
