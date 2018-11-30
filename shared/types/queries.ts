@@ -27,6 +27,8 @@ export interface Query {
   upcomingMatchStats: UpcomingMatches
   upcomingMatches: UpcomingMatches
   matchDetails: MatchDetails
+  commentaryDetails: CommentaryDetails
+  scorecardDetails: ScorecardDetails
 }
 
 export interface UpcomingMatches {
@@ -103,6 +105,7 @@ export interface Score {
 export interface Innings {
   id: number
   teamId: number
+  team?: Team | null
   isDeclared?: boolean | null
   name: string
   shortName: string
@@ -110,25 +113,39 @@ export interface Innings {
   runs: string
   score: string
   overs: string
+  batsmen?: (Batsmen | null)[] | null
+  bowlers?: (Bowler | null)[] | null
 }
 
 export interface Batsmen {
   name: string
   runs: string
-  ballsFaced: string
-  isFacing: boolean
+  ballsFaced?: string | null
+  isFacing?: boolean | null
   strikeRate: string
   id: number
+  balls?: string | null
+  fours?: string | null
+  sixes?: string | null
+  howOut?: string | null
+  fallOfWicket?: string | null
+  fallOfWicketOver?: string | null
+  fowOrder?: string | null
 }
 
 export interface Bowler {
   name: string
   wickets: string
-  runsAgainst: string
-  bowlerOver: string
+  runsAgainst?: string | null
+  bowlerOver?: string | null
   economy: string
-  strikeRate: string
+  strikeRate?: string | null
   id: number
+  runsConceded?: string | null
+  maidens?: string | null
+  overs?: string | null
+  wides?: string | null
+  noBalls?: string | null
 }
 
 export interface MatchDetails {
@@ -172,7 +189,107 @@ export interface Umpires {
 export interface Umpire {
   name: string
 }
+
+export interface CommentaryDetails {
+  meta?: CommentaryMeta | null
+  commentary?: Commentary | null
+}
+
+export interface CommentaryMeta {
+  total: number
+}
+
+export interface Commentary {
+  innings?: CommentaryInnings[] | null
+}
+
+export interface CommentaryInnings {
+  id: number
+  name: string
+  overs?: (Over | null)[] | null
+}
+
+export interface Over {
+  id: number
+  uniqueOverId: string
+  number: number
+  balls?: (Ball | null)[] | null
+}
+
+export interface Ball {
+  id: number
+  result: string
+  ballNumber: number
+  comments?: (Comment | null)[] | null
+}
+
+export interface Comment {
+  id: number
+  ballType: string
+  dateTime?: string | null
+  text: string
+  isFallOfWicket: boolean
+  batsmanId: number
+  bowlerId: number
+  runs: string
+  battingTeamScore: number
+  offStrikeBatsmanId: number
+  wickets: number
+}
+
+export interface ScorecardDetails {
+  meta: ScorecardMeta
+  fullScorecard?: Scorecard | null
+}
+
+export interface ScorecardMeta {
+  series: Series
+}
+
+export interface Scorecard {
+  innings?: ScorecardInnings[] | null
+  fullScorecardAwards?: FullScoreAwards | null
+  manOfTheMatchId?: number | null
+  manOfTheMatchName?: string | null
+  manOfMatchBattingResults?: (Batsmen | null)[] | null
+  manOfMatchBowlngResults?: (Bowler | null)[] | null
+  mostRunsAwardPlayerResults?: (Batsmen | null)[] | null
+  mostWicketsAwardPlayerResults?: (Bowler | null)[] | null
+}
+
+export interface ScorecardInnings {
+  id: number
+  name: string
+  team: Team
+  isDeclared?: boolean | null
+  overs?: (Over | null)[] | null
+  batsmen?: (Batsmen | null)[] | null
+  bowlers?: (Bowler | null)[] | null
+  wicket?: string | null
+  run?: string | null
+  over?: string | null
+  extra?: string | null
+  bye?: string | null
+  legBye?: string | null
+  wide?: string | null
+  noBall?: string | null
+  runRate?: string | null
+  requiredRunRate?: string | null
+}
+
+export interface FullScoreAwards {
+  mostRunsAward?: Batsmen | null
+  mostWicketsAward?: Bowler | null
+}
 export interface MatchDetailsQueryArgs {
+  matchid: string
+  seriesid: string
+}
+export interface CommentaryDetailsQueryArgs {
+  matchid: string
+  seriesid: string
+}
+export interface ScorecardDetailsQueryArgs {
   matchid: string
   seriesid: string
 }
@@ -182,6 +299,8 @@ export namespace QueryResolvers {
     upcomingMatchStats?: UpcomingMatchStatsResolver<UpcomingMatches, any, Context>
     upcomingMatches?: UpcomingMatchesResolver<UpcomingMatches, any, Context>
     matchDetails?: MatchDetailsResolver<MatchDetails, any, Context>
+    commentaryDetails?: CommentaryDetailsResolver<CommentaryDetails, any, Context>
+    scorecardDetails?: ScorecardDetailsResolver<ScorecardDetails, any, Context>
   }
 
   export type UpcomingMatchStatsResolver<
@@ -201,6 +320,26 @@ export namespace QueryResolvers {
     MatchDetailsArgs
   >
   export interface MatchDetailsArgs {
+    matchid: string
+    seriesid: string
+  }
+
+  export type CommentaryDetailsResolver<
+    R = CommentaryDetails,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context, CommentaryDetailsArgs>
+  export interface CommentaryDetailsArgs {
+    matchid: string
+    seriesid: string
+  }
+
+  export type ScorecardDetailsResolver<
+    R = ScorecardDetails,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context, ScorecardDetailsArgs>
+  export interface ScorecardDetailsArgs {
     matchid: string
     seriesid: string
   }
@@ -496,6 +635,7 @@ export namespace InningsResolvers {
   export interface Resolvers<Context = any> {
     id?: IdResolver<number, any, Context>
     teamId?: TeamIdResolver<number, any, Context>
+    team?: TeamResolver<Team | null, any, Context>
     isDeclared?: IsDeclaredResolver<boolean | null, any, Context>
     name?: NameResolver<string, any, Context>
     shortName?: ShortNameResolver<string, any, Context>
@@ -503,10 +643,17 @@ export namespace InningsResolvers {
     runs?: RunsResolver<string, any, Context>
     score?: ScoreResolver<string, any, Context>
     overs?: OversResolver<string, any, Context>
+    batsmen?: BatsmenResolver<(Batsmen | null)[] | null, any, Context>
+    bowlers?: BowlersResolver<(Bowler | null)[] | null, any, Context>
   }
 
   export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
   export type TeamIdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type TeamResolver<R = Team | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
   export type IsDeclaredResolver<R = boolean | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
@@ -526,26 +673,43 @@ export namespace InningsResolvers {
   export type RunsResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
   export type ScoreResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
   export type OversResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type BatsmenResolver<
+    R = (Batsmen | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type BowlersResolver<R = (Bowler | null)[] | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
 }
 
 export namespace BatsmenResolvers {
   export interface Resolvers<Context = any> {
     name?: NameResolver<string, any, Context>
     runs?: RunsResolver<string, any, Context>
-    ballsFaced?: BallsFacedResolver<string, any, Context>
-    isFacing?: IsFacingResolver<boolean, any, Context>
+    ballsFaced?: BallsFacedResolver<string | null, any, Context>
+    isFacing?: IsFacingResolver<boolean | null, any, Context>
     strikeRate?: StrikeRateResolver<string, any, Context>
     id?: IdResolver<number, any, Context>
+    balls?: BallsResolver<string | null, any, Context>
+    fours?: FoursResolver<string | null, any, Context>
+    sixes?: SixesResolver<string | null, any, Context>
+    howOut?: HowOutResolver<string | null, any, Context>
+    fallOfWicket?: FallOfWicketResolver<string | null, any, Context>
+    fallOfWicketOver?: FallOfWicketOverResolver<string | null, any, Context>
+    fowOrder?: FowOrderResolver<string | null, any, Context>
   }
 
   export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
   export type RunsResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
-  export type BallsFacedResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type BallsFacedResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
   >
-  export type IsFacingResolver<R = boolean, Parent = any, Context = any> = Resolver<
+  export type IsFacingResolver<R = boolean | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
@@ -556,17 +720,57 @@ export namespace BatsmenResolvers {
     Context
   >
   export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type BallsResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type FoursResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type SixesResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type HowOutResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type FallOfWicketResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type FallOfWicketOverResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type FowOrderResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
 }
 
 export namespace BowlerResolvers {
   export interface Resolvers<Context = any> {
     name?: NameResolver<string, any, Context>
     wickets?: WicketsResolver<string, any, Context>
-    runsAgainst?: RunsAgainstResolver<string, any, Context>
-    bowlerOver?: BowlerOverResolver<string, any, Context>
+    runsAgainst?: RunsAgainstResolver<string | null, any, Context>
+    bowlerOver?: BowlerOverResolver<string | null, any, Context>
     economy?: EconomyResolver<string, any, Context>
-    strikeRate?: StrikeRateResolver<string, any, Context>
+    strikeRate?: StrikeRateResolver<string | null, any, Context>
     id?: IdResolver<number, any, Context>
+    runsConceded?: RunsConcededResolver<string | null, any, Context>
+    maidens?: MaidensResolver<string | null, any, Context>
+    overs?: OversResolver<string | null, any, Context>
+    wides?: WidesResolver<string | null, any, Context>
+    noBalls?: NoBallsResolver<string | null, any, Context>
   }
 
   export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
@@ -575,12 +779,12 @@ export namespace BowlerResolvers {
     Parent,
     Context
   >
-  export type RunsAgainstResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type RunsAgainstResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
   >
-  export type BowlerOverResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type BowlerOverResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
@@ -590,12 +794,37 @@ export namespace BowlerResolvers {
     Parent,
     Context
   >
-  export type StrikeRateResolver<R = string, Parent = any, Context = any> = Resolver<
+  export type StrikeRateResolver<R = string | null, Parent = any, Context = any> = Resolver<
     R,
     Parent,
     Context
   >
   export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type RunsConcededResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type MaidensResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type OversResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type WidesResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type NoBallsResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
 }
 
 export namespace MatchDetailsResolvers {
@@ -780,4 +1009,372 @@ export namespace UmpireResolvers {
   }
 
   export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+}
+
+export namespace CommentaryDetailsResolvers {
+  export interface Resolvers<Context = any> {
+    meta?: MetaResolver<CommentaryMeta | null, any, Context>
+    commentary?: CommentaryResolver<Commentary | null, any, Context>
+  }
+
+  export type MetaResolver<R = CommentaryMeta | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type CommentaryResolver<R = Commentary | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+}
+
+export namespace CommentaryMetaResolvers {
+  export interface Resolvers<Context = any> {
+    total?: TotalResolver<number, any, Context>
+  }
+
+  export type TotalResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+}
+
+export namespace CommentaryResolvers {
+  export interface Resolvers<Context = any> {
+    innings?: InningsResolver<CommentaryInnings[] | null, any, Context>
+  }
+
+  export type InningsResolver<
+    R = CommentaryInnings[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+}
+
+export namespace CommentaryInningsResolvers {
+  export interface Resolvers<Context = any> {
+    id?: IdResolver<number, any, Context>
+    name?: NameResolver<string, any, Context>
+    overs?: OversResolver<(Over | null)[] | null, any, Context>
+  }
+
+  export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type OversResolver<R = (Over | null)[] | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+}
+
+export namespace OverResolvers {
+  export interface Resolvers<Context = any> {
+    id?: IdResolver<number, any, Context>
+    uniqueOverId?: UniqueOverIdResolver<string, any, Context>
+    number?: NumberResolver<number, any, Context>
+    balls?: BallsResolver<(Ball | null)[] | null, any, Context>
+  }
+
+  export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type UniqueOverIdResolver<R = string, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type NumberResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type BallsResolver<R = (Ball | null)[] | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+}
+
+export namespace BallResolvers {
+  export interface Resolvers<Context = any> {
+    id?: IdResolver<number, any, Context>
+    result?: ResultResolver<string, any, Context>
+    ballNumber?: BallNumberResolver<number, any, Context>
+    comments?: CommentsResolver<(Comment | null)[] | null, any, Context>
+  }
+
+  export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type ResultResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type BallNumberResolver<R = number, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type CommentsResolver<
+    R = (Comment | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+}
+
+export namespace CommentResolvers {
+  export interface Resolvers<Context = any> {
+    id?: IdResolver<number, any, Context>
+    ballType?: BallTypeResolver<string, any, Context>
+    dateTime?: DateTimeResolver<string | null, any, Context>
+    text?: TextResolver<string, any, Context>
+    isFallOfWicket?: IsFallOfWicketResolver<boolean, any, Context>
+    batsmanId?: BatsmanIdResolver<number, any, Context>
+    bowlerId?: BowlerIdResolver<number, any, Context>
+    runs?: RunsResolver<string, any, Context>
+    battingTeamScore?: BattingTeamScoreResolver<number, any, Context>
+    offStrikeBatsmanId?: OffStrikeBatsmanIdResolver<number, any, Context>
+    wickets?: WicketsResolver<number, any, Context>
+  }
+
+  export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type BallTypeResolver<R = string, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type DateTimeResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type TextResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type IsFallOfWicketResolver<R = boolean, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type BatsmanIdResolver<R = number, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type BowlerIdResolver<R = number, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type RunsResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type BattingTeamScoreResolver<R = number, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type OffStrikeBatsmanIdResolver<R = number, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type WicketsResolver<R = number, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+}
+
+export namespace ScorecardDetailsResolvers {
+  export interface Resolvers<Context = any> {
+    meta?: MetaResolver<ScorecardMeta, any, Context>
+    fullScorecard?: FullScorecardResolver<Scorecard | null, any, Context>
+  }
+
+  export type MetaResolver<R = ScorecardMeta, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type FullScorecardResolver<R = Scorecard | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+}
+
+export namespace ScorecardMetaResolvers {
+  export interface Resolvers<Context = any> {
+    series?: SeriesResolver<Series, any, Context>
+  }
+
+  export type SeriesResolver<R = Series, Parent = any, Context = any> = Resolver<R, Parent, Context>
+}
+
+export namespace ScorecardResolvers {
+  export interface Resolvers<Context = any> {
+    innings?: InningsResolver<ScorecardInnings[] | null, any, Context>
+    fullScorecardAwards?: FullScorecardAwardsResolver<FullScoreAwards | null, any, Context>
+    manOfTheMatchId?: ManOfTheMatchIdResolver<number | null, any, Context>
+    manOfTheMatchName?: ManOfTheMatchNameResolver<string | null, any, Context>
+    manOfMatchBattingResults?: ManOfMatchBattingResultsResolver<
+      (Batsmen | null)[] | null,
+      any,
+      Context
+    >
+    manOfMatchBowlngResults?: ManOfMatchBowlngResultsResolver<
+      (Bowler | null)[] | null,
+      any,
+      Context
+    >
+    mostRunsAwardPlayerResults?: MostRunsAwardPlayerResultsResolver<
+      (Batsmen | null)[] | null,
+      any,
+      Context
+    >
+    mostWicketsAwardPlayerResults?: MostWicketsAwardPlayerResultsResolver<
+      (Bowler | null)[] | null,
+      any,
+      Context
+    >
+  }
+
+  export type InningsResolver<
+    R = ScorecardInnings[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type FullScorecardAwardsResolver<
+    R = FullScoreAwards | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type ManOfTheMatchIdResolver<R = number | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type ManOfTheMatchNameResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type ManOfMatchBattingResultsResolver<
+    R = (Batsmen | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type ManOfMatchBowlngResultsResolver<
+    R = (Bowler | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type MostRunsAwardPlayerResultsResolver<
+    R = (Batsmen | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type MostWicketsAwardPlayerResultsResolver<
+    R = (Bowler | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+}
+
+export namespace ScorecardInningsResolvers {
+  export interface Resolvers<Context = any> {
+    id?: IdResolver<number, any, Context>
+    name?: NameResolver<string, any, Context>
+    team?: TeamResolver<Team, any, Context>
+    isDeclared?: IsDeclaredResolver<boolean | null, any, Context>
+    overs?: OversResolver<(Over | null)[] | null, any, Context>
+    batsmen?: BatsmenResolver<(Batsmen | null)[] | null, any, Context>
+    bowlers?: BowlersResolver<(Bowler | null)[] | null, any, Context>
+    wicket?: WicketResolver<string | null, any, Context>
+    run?: RunResolver<string | null, any, Context>
+    over?: OverResolver<string | null, any, Context>
+    extra?: ExtraResolver<string | null, any, Context>
+    bye?: ByeResolver<string | null, any, Context>
+    legBye?: LegByeResolver<string | null, any, Context>
+    wide?: WideResolver<string | null, any, Context>
+    noBall?: NoBallResolver<string | null, any, Context>
+    runRate?: RunRateResolver<string | null, any, Context>
+    requiredRunRate?: RequiredRunRateResolver<string | null, any, Context>
+  }
+
+  export type IdResolver<R = number, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type NameResolver<R = string, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type TeamResolver<R = Team, Parent = any, Context = any> = Resolver<R, Parent, Context>
+  export type IsDeclaredResolver<R = boolean | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type OversResolver<R = (Over | null)[] | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type BatsmenResolver<
+    R = (Batsmen | null)[] | null,
+    Parent = any,
+    Context = any
+  > = Resolver<R, Parent, Context>
+  export type BowlersResolver<R = (Bowler | null)[] | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type WicketResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type RunResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type OverResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type ExtraResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type ByeResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type LegByeResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type WideResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type NoBallResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type RunRateResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type RequiredRunRateResolver<R = string | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+}
+
+export namespace FullScoreAwardsResolvers {
+  export interface Resolvers<Context = any> {
+    mostRunsAward?: MostRunsAwardResolver<Batsmen | null, any, Context>
+    mostWicketsAward?: MostWicketsAwardResolver<Bowler | null, any, Context>
+  }
+
+  export type MostRunsAwardResolver<R = Batsmen | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
+  export type MostWicketsAwardResolver<R = Bowler | null, Parent = any, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >
 }

@@ -1,0 +1,36 @@
+query commentaryDetails($matchid: String!, $seriesid: String!) {
+  commentaryDetails(matchid: $matchid, seriesid: $seriesid) {
+    meta {
+      total
+    }
+    commentary {
+      innings {
+        id
+        name
+        overs {
+          id
+          uniqueOverId
+          number
+          balls {
+            id
+            result
+            ballNumber
+            comments {
+              id
+              ballType
+              dateTime
+              text
+              isFallOfWicket
+              batsmanId
+              bowlerId
+              runs
+              battingTeamScore
+              offStrikeBatsmanId
+              wickets
+            }
+          }
+        }
+      }
+    }
+  }
+}

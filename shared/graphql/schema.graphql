@@ -54,6 +54,7 @@ type Score {
 type Innings {
 	id: Int!
 	teamId: Int!
+	team: Team
 	isDeclared: Boolean
 	name: String!
 	shortName: String!
@@ -61,25 +62,39 @@ type Innings {
 	runs: String!
 	score: String!
 	overs: String!
+	batsmen: [Batsmen]
+	bowlers: [Bowler]
 }
 
 type Batsmen {
 	name: String!
 	runs: String!
-	ballsFaced: String!
-	isFacing: Boolean!
+	ballsFaced: String
+	isFacing: Boolean
 	strikeRate: String!
 	id: Int!
+	balls: String
+	fours: String
+	sixes: String
+	howOut: String
+	fallOfWicket: String
+	fallOfWicketOver: String
+	fowOrder: String
 }
 
 type Bowler {
 	name: String!
 	wickets: String!
-	runsAgainst: String!
-	bowlerOver: String!
+	runsAgainst: String
+	bowlerOver: String
 	economy: String!
-	strikeRate: String!
+	strikeRate: String
 	id: Int!
+  runsConceded: String
+	maidens: String
+	overs: String
+	wides: String
+	noBalls: String
 }
 
 type Match {
@@ -132,6 +147,94 @@ type MatchDetail {
 	matchSummary: Match!
 }
 
+type CommentaryMeta {
+	total: Int!
+}
+
+type Comment {
+	id: Int!
+	ballType: String!
+	dateTime: String
+	text: String!
+	isFallOfWicket: Boolean!
+	batsmanId: Int!
+	bowlerId: Int!
+	runs: String!
+	battingTeamScore: Int!
+	offStrikeBatsmanId: Int!
+	wickets: Int!
+}
+
+type Ball {
+	id: Int!
+	result: String!
+	ballNumber: Int!
+	comments: [Comment]
+}
+
+type Over {
+	id: Int!
+	uniqueOverId: String!
+	number: Int!
+	balls: [Ball]
+}
+
+type ScorecardInnings {
+	id: Int!
+	name: String!
+	team: Team!
+	isDeclared: Boolean
+	overs: [Over]
+	batsmen: [Batsmen]
+	bowlers: [Bowler]
+	wicket: String
+	run: String
+	over: String
+	extra: String
+	bye: String
+	legBye: String
+	wide: String
+	noBall: String
+	runRate: String
+	requiredRunRate: String
+}
+
+type CommentaryInnings {
+	id: Int!
+	name: String!
+	overs: [Over]
+}
+
+
+type Commentary {
+	innings: [CommentaryInnings!]
+}
+
+type ScorecardMeta {
+	series: Series!
+}
+
+type FullScoreAwards {
+	mostRunsAward: Batsmen
+	mostWicketsAward: Bowler
+}
+
+type Scorecard {
+	innings: [ScorecardInnings!]
+	fullScorecardAwards: FullScoreAwards
+	manOfTheMatchId: Int
+	manOfTheMatchName: String
+	manOfMatchBattingResults: [Batsmen]
+	manOfMatchBowlngResults: [Bowler]
+  mostRunsAwardPlayerResults: [Batsmen]
+  mostWicketsAwardPlayerResults: [Bowler]
+}
+
+type ScorecardDetails {
+	meta: ScorecardMeta!
+	fullScorecard: Scorecard
+}
+
 type UpcomingMatches {
 	meta: UpcomingStats!
 	matchList: Matches
@@ -142,8 +245,15 @@ type MatchDetails {
 	matchDetail: MatchDetail!
 }
 
+type CommentaryDetails {
+	meta: CommentaryMeta
+	commentary: Commentary
+}
+
 type Query {
 	upcomingMatchStats: UpcomingMatches!
 	upcomingMatches: UpcomingMatches!
 	matchDetails(matchid: String!, seriesid: String!): MatchDetails!
+	commentaryDetails(matchid: String!, seriesid: String!): CommentaryDetails!
+	scorecardDetails(matchid: String!, seriesid: String!): ScorecardDetails!
 }

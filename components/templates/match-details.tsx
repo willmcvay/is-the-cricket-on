@@ -6,8 +6,16 @@ import StyledNavBar from '../../styles/blocks/nav/nav-bar'
 import NavItem from '../common/nav-item'
 import { HOME, MATCH_LIST } from '../../shared/constants/routes'
 import TeamScoreSummary from './team-score-summary'
+import CommentaryDetails from '../query-providers/commentary-details'
+import ScorecardDetails from '../query-providers/scorecard-details'
 
-const MatchDetails = ({ matchSummary }: MatchDetail & MatchStats) => {
+const MatchDetails = ({
+  matchSummary,
+  hasFullScorecard,
+  seriesid,
+  matchid,
+  hasCommentary
+}: MatchDetail & MatchStats & { matchid: string; seriesid: string }) => {
   const { homeTeam, awayTeam, matchSummaryText, currentMatchState, scores } = matchSummary
 
   return (
@@ -20,6 +28,8 @@ const MatchDetails = ({ matchSummary }: MatchDetail & MatchStats) => {
         <StyledH6>{matchSummaryText}</StyledH6>
         <TeamScoreSummary team={homeTeam} scores={scores} isHome={true} />
         <TeamScoreSummary team={awayTeam} scores={scores} isHome={false} />
+        {hasCommentary && <CommentaryDetails seriesid={seriesid} matchid={matchid} />}
+        {hasFullScorecard && <ScorecardDetails seriesid={seriesid} matchid={matchid} />}
       </StyledHeader>
       <StyledNavBar>
         <NavItem prefetch pathname={HOME} displayText={'Home'} />

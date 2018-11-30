@@ -1,0 +1,126 @@
+query scorecardDetails($matchid: String!, $seriesid: String!) {
+  scorecardDetails(matchid: $matchid, seriesid: $seriesid) {
+    fullScorecard {
+      innings {
+        id
+        team {
+          id
+          shortName
+        }
+        isDeclared
+        name
+        wicket
+        run
+        over
+        extra
+        bye
+        legBye
+        noBall
+        batsmen {
+          name
+          runs
+          ballsFaced
+          isFacing
+          strikeRate
+          id
+          balls
+          fours
+          sixes
+          howOut
+          fallOfWicket
+          fallOfWicketOver
+          fowOrder
+        }
+        bowlers {
+        	name
+          wickets
+          runsAgainst
+          bowlerOver
+          economy
+          strikeRate
+          id
+          runsConceded
+          maidens
+          wickets
+          overs
+          wides
+          noBalls
+          strikeRate
+        }
+      }
+      fullScorecardAwards {
+        mostRunsAward {
+          id
+          balls
+          fours
+          sixes
+          howOut
+          name
+          runs
+          ballsFaced
+          strikeRate
+        }
+        mostWicketsAward {
+          name
+          wickets
+          runsAgainst
+          economy
+          strikeRate
+          id
+          runsConceded
+          maidens
+          wickets
+          overs
+        }
+      }
+      manOfTheMatchId
+      manOfTheMatchName
+      manOfMatchBattingResults {
+        id
+        balls
+        fours
+        sixes
+        howOut
+        name
+        runs
+        ballsFaced
+        strikeRate
+      }
+      manOfMatchBowlngResults {
+        name
+        wickets
+        runsAgainst
+        economy
+        strikeRate
+        id
+        runsConceded
+        maidens
+        wickets
+        overs
+      }
+      mostRunsAwardPlayerResults {
+        id
+        balls
+        fours
+        sixes
+        howOut
+        name
+        runs
+        ballsFaced
+        strikeRate
+      }
+      mostWicketsAwardPlayerResults {
+        name
+        wickets
+        runsAgainst
+        economy
+        strikeRate
+        id
+        runsConceded
+        maidens
+        wickets
+        overs
+      }
+    }
+  }
+}

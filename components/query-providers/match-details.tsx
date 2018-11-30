@@ -14,10 +14,11 @@ export interface MatchDetailsProps extends Core.ApolloWrappedProps {
 export const MatchDetails = (props: MatchDetailsProps) => {
   const matchDetail = nullSafe(null, p => p.data!.matchDetails!.matchDetail, props)
   const meta = nullSafe(null, p => p.data!.matchDetails!.meta, props)
+  const { matchid, seriesid } = props.queryString
 
   if (!matchDetail || !meta) return null
 
-  return <MatchDetailsComponent {...{ ...matchDetail, ...meta }} />
+  return <MatchDetailsComponent {...{ ...matchDetail, ...meta, matchid, seriesid }} />
 }
 
 export default graphql<MatchDetailsProps, Query, {}>(matchDetails, {
