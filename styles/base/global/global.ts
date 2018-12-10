@@ -127,7 +127,7 @@ export default () => injectGlobal`
   }
 
   html {
-    font-family: 'Raleway', 'Helvetica', sans-serif;
+    font-family: 'Marvel', 'Helvetica', sans-serif;
     line-height: 1;
     font-size: 24px;
     width: 100%;

@@ -31,7 +31,7 @@ class AppDocument extends Document<DocumentProps> {
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
           />
           <title>Is the Cricket on?</title>
-          <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Marvel" rel="stylesheet" />
           {this.props.styleTags}
         </Head>
         <Main />

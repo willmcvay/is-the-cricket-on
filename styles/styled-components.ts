@@ -1,9 +1,11 @@
 import * as styledComponents from 'styled-components'
 
 export interface ThemeInterface {
-  primaryColor: string
-  secondaryColor: string
-  isActive: boolean
+  primaryColor?: string
+  secondaryColor?: string
+  isActive?: boolean
+  gridColumns?: string
+  invertColor?: boolean
 }
 
 const {
