@@ -6,6 +6,7 @@ export interface ThemeInterface {
   isActive?: boolean
   gridColumns?: string
   invertColor?: boolean
+  size?: 'FULL' | 'HALF' | 'QUARTER'
 }
 
 const {

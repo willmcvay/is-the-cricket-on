@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Team, Score } from '../../shared/types/queries'
 import TeamItem from './team-item'
-import StyledTeamScoreSummary from '../../styles/blocks/team/team-score-summary'
+import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
 
 interface TeamScoreSummaryProps {
   team: Team
@@ -11,11 +11,11 @@ interface TeamScoreSummaryProps {
 
 const TeamScoreSummary = ({ team, scores, isHome }: TeamScoreSummaryProps) => {
   return (
-    <StyledTeamScoreSummary>
+    <StyledGridWrapper theme={{ gridColumns: '100%' }}>
       <TeamItem {...team} />
       <span>{scores && isHome && `${scores.homeScore} ${scores.homeOvers}`}</span>
       <span>{scores && !isHome && `${scores.awayScore} ${scores.awayOvers}`}</span>
-    </StyledTeamScoreSummary>
+    </StyledGridWrapper>
   )
 }
 

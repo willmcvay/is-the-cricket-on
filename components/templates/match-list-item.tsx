@@ -7,6 +7,8 @@ import { stringMapToQuery } from '../../shared/utils/data'
 import StyledA from '../../styles/base/elements/anchor'
 import { StyledH6 } from '../../styles/base/typeography/headings'
 import { withComma } from '../../shared/utils/text'
+import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
+import StyledDivider from '../../styles/base/layout/divider'
 
 const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) => {
   const query = stringMapToQuery({
@@ -15,7 +17,7 @@ const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) =
   })
 
   return (
-    <React.Fragment>
+    <StyledDivider theme={{ size: 'FULL' }}>
       <Link prefetch href={`${MATCH_DETAILS}${query}`}>
         <StyledA href={`${MATCH_DETAILS}${query}`}>
           <StyledH6>
@@ -23,11 +25,13 @@ const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) =
             {withComma(series.name)}
             {venue.name}
           </StyledH6>
-          <TeamItem {...homeTeam} />
-          <TeamItem {...awayTeam} />
+          <StyledGridWrapper theme={{ gridColumns: '50% 50%' }}>
+            <TeamItem {...homeTeam} />
+            <TeamItem {...awayTeam} />
+          </StyledGridWrapper>
         </StyledA>
       </Link>
-    </React.Fragment>
+    </StyledDivider>
   )
 }
 

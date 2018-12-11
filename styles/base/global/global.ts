@@ -138,5 +138,6 @@ export default () => injectGlobal`
     width: auto;
     padding: 1rem;
     background: ${midGrey};
+    line-height: 1.2;
   }
 `

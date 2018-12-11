@@ -6,8 +6,9 @@ import { Core } from '../shared/types/core'
 
 export type MatchListProps = Core.ApolloWrappedRouterProps<QueryParams.MatchList>
 
-const MatchList = (props: MatchListProps) => (
-  <MatchListQuery queryString={props.router.query as QueryParams.MatchList} />
-)
+const MatchList = (props: MatchListProps) => {
+  if (!props.router || !props.router.query) return null
+  return <MatchListQuery queryString={props.router.query} />
+}
 
 export default withRouter(MatchList)

@@ -8,6 +8,8 @@ import { HOME, MATCH_LIST } from '../../shared/constants/routes'
 import TeamScoreSummary from './team-score-summary'
 import CommentaryDetails from '../query-providers/commentary-details'
 import ScorecardDetails from '../query-providers/scorecard-details'
+import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
+import StyledDivider from '../../styles/base/layout/divider'
 
 const MatchDetails = ({
   matchSummary,
@@ -21,13 +23,17 @@ const MatchDetails = ({
   return (
     <React.Fragment>
       <StyledHeader>
-        <StyledH1>Match details</StyledH1>
-        <StyledH4>
-          {homeTeam.name} vs {awayTeam.name}
-        </StyledH4>
-        <StyledH6>{matchSummaryText}</StyledH6>
-        <TeamScoreSummary team={homeTeam} scores={scores} isHome={true} />
-        <TeamScoreSummary team={awayTeam} scores={scores} isHome={false} />
+        <StyledDivider theme={{ size: 'HALF' }}>
+          <StyledH1>Match details</StyledH1>
+          <StyledH4>
+            {homeTeam.name} vs {awayTeam.name}
+          </StyledH4>
+          <StyledH6>{matchSummaryText}</StyledH6>
+        </StyledDivider>
+        <StyledGridWrapper theme={{ gridColumns: '50% 50%' }}>
+          <TeamScoreSummary team={homeTeam} scores={scores} isHome={true} />
+          <TeamScoreSummary team={awayTeam} scores={scores} isHome={false} />
+        </StyledGridWrapper>
         {hasCommentary && <CommentaryDetails seriesid={seriesid} matchid={matchid} />}
         {hasFullScorecard && <ScorecardDetails seriesid={seriesid} matchid={matchid} />}
       </StyledHeader>
@@ -36,7 +42,9 @@ const MatchDetails = ({
         <NavItem
           prefetch
           pathname={MATCH_LIST}
-          query={{ status: currentMatchState === 'LIVE' ? 'INPROGRESS' : currentMatchState }}
+          query={{
+            status: currentMatchState.indexOf('LIVE') !== -1 ? 'INPROGRESS' : currentMatchState
+          }}
           displayText={`Match List`}
         />
       </StyledNavBar>

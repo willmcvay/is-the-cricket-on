@@ -7,7 +7,6 @@ import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
 import ScoreCardHeader from './scorecard-header'
 
 const ScorecardDetails = (props: Scorecard) => {
-  console.log('SCORECARD PROPS', props)
   if (!props.innings) return null
   return (
     <React.Fragment>
