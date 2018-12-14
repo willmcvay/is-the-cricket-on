@@ -16,6 +16,7 @@ const dataGetter = async (
 
   try {
     const cached = await cache.asyncGet(CACHE_KEY, queryString)
+
     if (cached) {
       const parsedCache = JSON.parse(cached)
       const { cacheExpiry } = parsedCache
