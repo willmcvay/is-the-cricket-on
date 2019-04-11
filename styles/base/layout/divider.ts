@@ -6,8 +6,8 @@ const StyledDivider = styled.div`
     props.theme.size === 'HALF'
       ? layoutHalf
       : props.theme.size === 'QUARTER'
-        ? layoutQuarter
-        : layoutBase};
+      ? layoutQuarter
+      : layoutBase};
 `
 
 export default StyledDivider
