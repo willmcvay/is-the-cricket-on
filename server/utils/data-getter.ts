@@ -31,8 +31,10 @@ const dataGetter = async (
 
     const response = await get<Query>(API_KEY, queryString)
     const timeStampedResponse = { ...response, cacheExpiry: unixNow() }
+
     await cache.asyncSet(CACHE_KEY, queryString, timeStampedResponse)
     console.log(`DATA FETCHED FROM API AND CACHED FOR  ${API_KEY}${queryString} ${CACHE_KEY}`)
+
     return response
   } catch (err) {
     console.error(`ERROR GETTING DATA FOR ${API_KEY} ${CACHE_KEY}`)

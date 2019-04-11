@@ -1,6 +1,6 @@
 import * as redis from 'redis'
 import * as util from 'util'
-import * as cacheKeys from 'shared/constants/cache-keys'
+import * as cacheKeys from '../../shared/constants/cache-keys'
 
 export default () => {
   const cache =
