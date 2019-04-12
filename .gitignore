@@ -1,6 +1,7 @@
 node_modules
 coverage
 dump.rdb
+static/workbox
 .DS_Store
 .vscode
 .yarnclean

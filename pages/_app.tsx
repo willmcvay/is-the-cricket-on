@@ -6,6 +6,7 @@ import ApolloClient from 'apollo-boost'
 import PageContainer from '../styles/base/layout/container'
 import InnerContainer from '../styles/base/layout/inner-container'
 import GlobalStyle from '../styles/base/global/global'
+import OfflineSupport from '../components/hocs/offline-support'
 
 type Props = AppComponentProps & {
   apollo: ApolloClient<any>
@@ -17,6 +18,7 @@ class MyApp extends App<Props> {
     return (
       <Container>
         <GlobalStyle />
+        <OfflineSupport />
         <PageContainer>
           <InnerContainer>
             <ApolloProvider client={apollo}>
