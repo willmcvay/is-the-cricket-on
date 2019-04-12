@@ -5,7 +5,7 @@ import withApollo from '../components/hocs/with-apollo'
 import ApolloClient from 'apollo-boost'
 import PageContainer from '../styles/base/layout/container'
 import InnerContainer from '../styles/base/layout/inner-container'
-import globalStyles from '../styles/base/global/global'
+import GlobalStyle from '../styles/base/global/global'
 
 type Props = AppComponentProps & {
   apollo: ApolloClient<any>
@@ -14,9 +14,9 @@ type Props = AppComponentProps & {
 class MyApp extends App<Props> {
   render() {
     const { Component, pageProps, apollo } = this.props
-    globalStyles()
     return (
       <Container>
+        <GlobalStyle />
         <PageContainer>
           <InnerContainer>
             <ApolloProvider client={apollo}>

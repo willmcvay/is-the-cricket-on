@@ -12,11 +12,11 @@ export interface ThemeInterface {
 const {
   default: styled,
   css,
-  injectGlobal,
+  createGlobalStyle,
   keyframes,
   ThemeProvider
 } = styledComponents as styledComponents.ThemedStyledComponentsModule<ThemeInterface>
 
-export { css, injectGlobal, keyframes, ThemeProvider }
+export { css, createGlobalStyle, keyframes, ThemeProvider }
 
 export default styled

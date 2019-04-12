@@ -1,7 +1,8 @@
-import { injectGlobal } from '../../styled-components'
+import { createGlobalStyle } from '../../styled-components'
+
 import { midGrey } from '../variables/colors'
 
-export default () => injectGlobal`
+const GlobalStyle = createGlobalStyle`
   div,
   span,
   applet,
@@ -141,3 +142,5 @@ export default () => injectGlobal`
     line-height: 1.2;
   }
 `
+
+export default GlobalStyle
