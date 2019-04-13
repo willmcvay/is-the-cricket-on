@@ -13,8 +13,45 @@ module.exports = withTypescript({
           staticFileGlobsIgnorePatterns: [/\.next\//],
           runtimeCaching: [
             {
+              urlPattern: '/',
               handler: 'networkFirst',
-              urlPattern: /^https?.*/
+              options: {
+                cacheName: 'html-cache',
+              }
+            },
+            {
+              urlPattern: /\/match-details\/.*/,
+              handler: 'networkFirst',
+              options: {
+                cacheName: 'html-cache',
+              }
+            },
+            {
+              urlPattern: /\/match-list\/.*/,
+              handler: 'networkFirst',
+              options: {
+                cacheName: 'html-cache',
+              }
+            },
+            {
+              urlPattern: new RegExp(`^https://isthecricketon.herokuapp.com/graphql`),
+              handler: 'staleWhileRevalidate',
+              options: {
+                cacheName: 'api-cache',
+                cacheableResponse: {
+                  statuses: [200],
+                }
+              }
+            },
+            {
+              urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif)/,
+              handler: 'cacheFirst',
+              options: {
+                cacheName: 'image-cache',
+                cacheableResponse: {
+                  statuses: [0, 200],
+                }
+              }
             }
           ]
         }),
