@@ -22,7 +22,7 @@ app
     serverApollo.applyMiddleware({ app: serverApp })
     serverApp.get('*', (req, res) => {
       if (req.url.includes('/sw')) {
-        const filePath = join(__dirname, '..', 'static', 'workbox', 'sw.js')
+        const filePath = join(__dirname, 'static', 'workbox', 'sw.js')
         app.serveStatic(req, res, filePath).catch(err => console.error(err.message))
       } else if (req.url.startsWith('static/workbox/')) {
         app.serveStatic(req, res, join(__dirname, req.url)).catch(err => console.error(err.message))
