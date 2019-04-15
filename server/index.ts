@@ -8,6 +8,7 @@ import { ApolloServer } from 'apollo-server-express'
 import cacheInitialise from './utils/initialise-cache'
 import typeDefs from '../shared/graphql/type-defs'
 import resolvers from '../shared/graphql/resolvers'
+// import console = require('console')
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 8000
@@ -26,7 +27,7 @@ app
       const { pathname } = parsedUrl
 
       if (pathname === '/service-worker.js') {
-        const filePath = join(__dirname, '.next', pathname)
+        const filePath = join(__dirname, '..', '..', pathname)
         app.serveStatic(req, res, filePath).catch(err => console.error(err.message))
       } else {
         handle(req, res, req.url as any).catch(err => console.error(err.message))
