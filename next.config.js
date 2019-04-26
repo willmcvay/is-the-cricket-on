@@ -16,28 +16,28 @@ module.exports = withTypescript({
               urlPattern: '/',
               handler: 'networkFirst',
               options: {
-                cacheName: 'html-cache',
+                cacheName: 'home-cache',
               }
             },
             {
               urlPattern: /\/match-details\/.*/,
               handler: 'networkFirst',
               options: {
-                cacheName: 'html-cache',
+                cacheName: 'match-details-cache',
               }
             },
             {
               urlPattern: /\/match-list\/.*/,
               handler: 'networkFirst',
               options: {
-                cacheName: 'html-cache',
+                cacheName: 'match-list-cache',
               }
             },
             {
-              urlPattern: new RegExp(`^https://isthecricketon.herokuapp.com/graphql`),
-              handler: 'staleWhileRevalidate',
+              urlPattern: /^https:\/\/isthecricketon\.herokuapp\.com\/graphql/,
+              handler: 'networkFirst',
               options: {
-                cacheName: 'api-cache',
+                cacheName: 'gql-cache',
                 cacheableResponse: {
                   statuses: [200],
                 }

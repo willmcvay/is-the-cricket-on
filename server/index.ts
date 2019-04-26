@@ -8,7 +8,8 @@ import { ApolloServer } from 'apollo-server-express'
 import cacheInitialise from './utils/initialise-cache'
 import typeDefs from '../shared/graphql/type-defs'
 import resolvers from '../shared/graphql/resolvers'
-// import console = require('console')
+import pageCache from './utils/page-cache'
+import { MATCH_LIST, HOME, MATCH_DETAILS } from '../shared/constants/routes'
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 8000
@@ -22,7 +23,20 @@ app
   .prepare()
   .then(() => {
     serverApollo.applyMiddleware({ app: serverApp })
-    serverApp.get('*', (req, res) => {
+
+    serverApp.get(HOME, (req: express.Request, res: express.Response) => {
+      pageCache(req, res, app, HOME).catch(err => console.error(err.message))
+    })
+
+    serverApp.get(MATCH_LIST, (req: express.Request, res: express.Response) => {
+      pageCache(req, res, app, MATCH_LIST, req.query).catch(err => console.error(err.message))
+    })
+
+    serverApp.get(MATCH_DETAILS, (req: express.Request, res: express.Response) => {
+      pageCache(req, res, app, MATCH_DETAILS, req.query).catch(err => console.error(err.message))
+    })
+
+    serverApp.get('*', (req: express.Request, res: express.Response) => {
       const parsedUrl = parse(req.url, true)
       const { pathname } = parsedUrl
 
