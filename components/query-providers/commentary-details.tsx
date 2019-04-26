@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { graphql } from 'react-apollo'
+import { oc } from 'ts-optchain'
 import commentaryDetails from '../../shared/graphql/queries/commentary-details.graphql'
 import { Query } from '../../shared/types/queries'
 import { Core } from '../../shared/types/core'
 import CommentaryDetailsComponent from '../templates/commentary-details'
-import { nullSafe } from '../../shared/utils/null-safe'
 
 export interface CommentaryDetailsProps extends Core.ApolloWrappedProps {
   matchid?: string
@@ -12,8 +12,8 @@ export interface CommentaryDetailsProps extends Core.ApolloWrappedProps {
 }
 
 export const CommentaryDetails = (props: CommentaryDetailsProps) => {
-  const innings = nullSafe(null, p => p.data!.commentaryDetails!.commentary!.innings!, props)
-  const meta = nullSafe(null, p => p.data!.commentaryDetails!.meta, props)
+  const innings = oc(props).data.commentaryDetails.commentary.innings(null)
+  const meta = oc(props).data.commentaryDetails.meta(null)
 
   if (!innings || !innings.length || !meta) return null
 

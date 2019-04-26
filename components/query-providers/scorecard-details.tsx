@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { graphql } from 'react-apollo'
+import { oc } from 'ts-optchain'
 import scorecardDetails from '../../shared/graphql/queries/scorecard-details.graphql'
 import { Query } from '../../shared/types/queries'
 import { Core } from '../../shared/types/core'
 import ScorecardDetailsComponent from '../templates/scorecard-details'
-import { nullSafe } from '../../shared/utils/null-safe'
 
 export interface ScorecardDetailsProps extends Core.ApolloWrappedProps {
   matchid?: string
@@ -12,7 +12,7 @@ export interface ScorecardDetailsProps extends Core.ApolloWrappedProps {
 }
 
 export const ScorecardDetails = (props: ScorecardDetailsProps) => {
-  const fullScorecard = nullSafe(null, p => p.data!.scorecardDetails!.fullScorecard!, props)
+  const fullScorecard = oc(props).data.scorecardDetails.fullScorecard()
 
   if (!fullScorecard) return null
 

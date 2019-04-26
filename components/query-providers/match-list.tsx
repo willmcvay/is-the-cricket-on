@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { graphql } from 'react-apollo'
+import { oc } from 'ts-optchain'
 import upcomingMatches from '../../shared/graphql/queries/upcoming-matches.graphql'
 import { Query, Match } from '../../shared/types/queries'
 import MatchListComponent from '../templates/match-list'
 import { Core } from '../../shared/types/core'
-import { nullSafe } from '../../shared/utils/null-safe'
 import { QueryParams } from '../../shared/types/api'
 
 export interface MatchListQueryProps extends Core.ApolloWrappedProps {
@@ -12,8 +12,8 @@ export interface MatchListQueryProps extends Core.ApolloWrappedProps {
 }
 
 export const filterMatchList = (props: MatchListQueryProps): Match[] => {
-  const matches = nullSafe([], p => p.data!.upcomingMatches!.matchList!.matches, props) as Match[]
-  const status = nullSafe('', p => p.queryString.status, props)
+  const matches = oc(props).data.upcomingMatches.matchList.matches([])
+  const status = oc(props).queryString.status()
   return matches.filter(
     match =>
       (status === 'INPROGRESS' && match.status.indexOf('LIVE') !== -1) || match.status === status
@@ -21,7 +21,7 @@ export const filterMatchList = (props: MatchListQueryProps): Match[] => {
 }
 
 export const getStatusText = (props: MatchListQueryProps): string => {
-  const status = nullSafe('', p => p.queryString.status, props)
+  const status = oc(props).queryString.status()
   switch (status) {
     case 'COMPLETED':
       return ' completed'

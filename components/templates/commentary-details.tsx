@@ -1,7 +1,7 @@
 import * as React from 'react'
+import { oc } from 'ts-optchain'
 import { CommentaryInnings, CommentaryMeta } from '../../shared/types/queries'
 import { StyledH4 } from '../../styles/base/typeography/headings'
-import { nullSafe } from '../../shared/utils/null-safe'
 import StyledP from '../../styles/base/elements/paragraph'
 
 export interface CommentaryDetailsProps extends CommentaryMeta {
@@ -9,7 +9,7 @@ export interface CommentaryDetailsProps extends CommentaryMeta {
 }
 
 const CommentaryDetails = (props: CommentaryDetailsProps) => {
-  const commentaryItem = nullSafe(null, p => p.innings[0].overs![0]!.balls![0]!.comments, props)
+  const commentaryItem = oc(props).innings[0].overs[0].balls[0].comments()
 
   if (!commentaryItem) return null
   return (

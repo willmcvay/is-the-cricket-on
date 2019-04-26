@@ -8345,6 +8345,10 @@ ts-node@8.0.3:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
+ts-optchain@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/ts-optchain/-/ts-optchain-0.1.6.tgz#5b0a72f5de0106a0163bc123be7923e2f290598e"
+
 tslib@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
