@@ -1,13 +1,21 @@
-export const fontSizeBase = `1rem`
-export const lineHeightBase = `1.5`
+const fontSizes = {
+  base: `16px`,
 
-export const fontSizeH1 = `calc(${fontSizeBase} * 1.6)`
-export const fontSizeH2 = `calc(${fontSizeBase} * 1.5)`
-export const fontSizeH3 = `calc(${fontSizeBase} * 1.4)`
-export const fontSizeH4 = `calc(${fontSizeBase} * 1.2)`
-export const fontSizeH5 = `calc(${fontSizeBase} * 1.1)`
-export const fontSizeH6 = `${fontSizeBase}`
+  h1: `calc(1rem / 0.18)`, // 100px
+  h2: `calc(1rem * 3)`, // 48px
+  h3: `calc(1rem * 2.125)`, // 34px
+  h4: `calc(1rem * 1.5)`, // 24px
 
-export const textSm = `calc(${fontSizeBase} * 0.875)`
-export const textXSm = `calc(${fontSizeBase} * 0.75)`
-export const textXxSm = `calc(${fontSizeBase} * 0.625)`
+  h1Mob: `calc(1rem * 3)`, // 48px
+  h2Mob: `calc(1rem * 2)`, // 32px
+  h3Mob: `calc(1rem * 1.5)`, // 24px
+  h4Mob: `calc(1rem * 1.375)`, // 22px
+
+  textSmall: `calc(1rem * 0.8125)`, // 13px
+  textBase: `1rem`, // 16px
+  textLarge: `calc(1rem * 1.125)`, // 18px
+  textXLarge: `calc(1rem / 0.8)`, // 20px
+  textXXLarge: `calc(1rem * 1.4375)` // 23px
+}
+
+export default fontSizes

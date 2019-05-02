@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { MatchDetail, MatchStats } from '../../shared/types/queries'
-import { StyledH1, StyledH4, StyledH6 } from '../../styles/base/typeography/headings'
+import { StyledH1, StyledH2, StyledH3 } from '../../styles/base/typeography/headings'
 import StyledHeader from '../../styles/base/layout/header'
 import StyledNavBar from '../../styles/blocks/nav/nav-bar'
 import NavItem from '../common/nav-item'
@@ -21,14 +21,14 @@ const MatchDetails = ({
   const { homeTeam, awayTeam, matchSummaryText, currentMatchState, scores } = matchSummary
 
   return (
-    <React.Fragment>
+    <>
       <StyledHeader>
         <StyledDivider theme={{ size: 'HALF' }}>
-          <StyledH1>Match details</StyledH1>
-          <StyledH4>
+          <StyledH1>Match Details</StyledH1>
+          <StyledH2>
             {homeTeam.name} vs {awayTeam.name}
-          </StyledH4>
-          <StyledH6>{matchSummaryText}</StyledH6>
+          </StyledH2>
+          <StyledH3>{matchSummaryText}</StyledH3>
         </StyledDivider>
         <StyledGridWrapper theme={{ gridColumns: '50% 50%' }}>
           <TeamScoreSummary team={homeTeam} scores={scores} isHome={true} />
@@ -48,7 +48,7 @@ const MatchDetails = ({
           displayText={`Match List`}
         />
       </StyledNavBar>
-    </React.Fragment>
+    </>
   )
 }
 

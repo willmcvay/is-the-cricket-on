@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { MATCH_DETAILS } from '../../shared/constants/routes'
 import { stringMapToQuery } from '../../shared/utils/data'
 import StyledA from '../../styles/base/elements/anchor'
-import { StyledH6 } from '../../styles/base/typeography/headings'
+import { StyledH4 } from '../../styles/base/typeography/headings'
 import { withComma } from '../../shared/utils/text'
 import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
 import StyledDivider from '../../styles/base/layout/divider'
@@ -20,11 +20,11 @@ const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) =
     <StyledDivider theme={{ size: 'FULL' }}>
       <Link prefetch href={`${MATCH_DETAILS}${query}`}>
         <StyledA href={`${MATCH_DETAILS}${query}`}>
-          <StyledH6>
+          <StyledH4>
             {withComma(name)}
             {withComma(series.name)}
             {venue.name}
-          </StyledH6>
+          </StyledH4>
           <StyledGridWrapper theme={{ gridColumns: '50% 50%' }}>
             <TeamItem {...homeTeam} />
             <TeamItem {...awayTeam} />

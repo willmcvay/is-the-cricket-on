@@ -1,45 +1,75 @@
 import styled from '../../styled-components'
-import {
-  fontSizeH1,
-  fontSizeH2,
-  fontSizeH3,
-  fontSizeH4,
-  fontSizeH5,
-  fontSizeH6
-} from '../variables/font-sizes'
+import fontSizes from '../variables/font-sizes'
+import lineHeights from '../variables/line-heights'
+import mediaQueries from '../variables/media-queries'
+import colors from '../variables/colors'
+import { layoutDouble, layoutBase } from '../variables/layout'
 
-export const StyledH1 = styled.h1`
-  font-size: ${fontSizeH1};
+interface HeaderProps {
+  textCentered?: boolean
+}
+
+export const StyledH1 = styled.h1<HeaderProps>`
+  font-family: 'Rockwell', 'Helvetica', sans-serif;
+  font-size: ${fontSizes.h1Mob};
   font-weight: bold;
-  margin: calc(${fontSizeH1} / 2) 0 calc(${fontSizeH1} / 2.5) 0;
+  margin: -1rem -1rem ${fontSizes.textBase};
+  text-align: ${props => (props.textCentered && 'center') || 'left'};
+  line-height: ${lineHeights.h1Mob};
+  color: ${colors.white};
+  background: ${colors.deepBlue};
+  border-radius: 5px 5px 0 0;
+  padding: ${layoutBase};
+
+  ${mediaQueries.aboveTablet} {
+    font-size: ${fontSizes.h1};
+    margin: -2rem -2rem ${fontSizes.textBase};
+    line-height: ${lineHeights.h1};
+    padding: ${layoutBase} ${layoutDouble};
+  }
 `
 
-export const StyledH2 = styled.h2`
-  font-size: ${fontSizeH2};
+export const StyledH2 = styled.h2<HeaderProps>`
+  font-family: 'Rockwell', 'Helvetica', sans-serif;
+  font-size: ${fontSizes.h2Mob};
   font-weight: bold;
-  margin: calc(${fontSizeH2} / 2) 0 calc(${fontSizeH2} / 2.5) 0;
+  margin: 0 0 ${fontSizes.textBase} 0;
+  text-align: ${props => (props.textCentered && 'center') || 'left'};
+  line-height: ${lineHeights.h2Mob};
+
+  ${mediaQueries.aboveTablet} {
+    font-size: ${fontSizes.h2};
+    margin: 0 0 ${fontSizes.textBase} 0;
+    line-height: ${lineHeights.h2};
+  }
 `
 
-export const StyledH3 = styled.h3`
-  font-size: ${fontSizeH3};
+export const StyledH3 = styled.h3<HeaderProps>`
+  font-family: 'Rockwell', 'Helvetica', sans-serif;
+  font-size: ${fontSizes.h3Mob};
   font-weight: bold;
-  margin: calc(${fontSizeH3} / 2) 0 calc(${fontSizeH3} / 2.5) 0;
+  margin: 0 0 ${fontSizes.textBase} 0;
+  text-align: ${props => (props.textCentered && 'center') || 'left'};
+  line-height: ${lineHeights.h3Mob};
+
+  ${mediaQueries.aboveTablet} {
+    font-size: ${fontSizes.h3};
+    margin: 0 0 ${fontSizes.textBase} 0;
+    line-height: ${lineHeights.h3};
+  }
 `
 
-export const StyledH4 = styled.h4`
-  font-size: ${fontSizeH4};
+export const StyledH4 = styled.h4<HeaderProps>`
+  font-family: 'Rockwell', 'Helvetica', sans-serif;
+  font-size: ${fontSizes.h4Mob};
   font-weight: bold;
-  margin: calc(${fontSizeH4} / 2) 0 calc(${fontSizeH4} / 2.5) 0;
-`
+  margin: 0 0 ${fontSizes.textBase} 0;
+  text-align: ${props => (props.textCentered && 'center') || 'left'};
+  line-height: ${lineHeights.h4Mob};
 
-export const StyledH5 = styled.h5`
-  font-size: ${fontSizeH5};
-  font-weight: bold;
-  margin: calc(${fontSizeH5} / 2) 0 calc(${fontSizeH5} / 2.5) 0;
-`
-
-export const StyledH6 = styled.h6`
-  font-size: ${fontSizeH6};
-  font-weight: bold;
-  margin: calc(${fontSizeH6} / 2) 0 calc(${fontSizeH6} / 2.5) 0;
+  ${mediaQueries.aboveTablet} {
+    font-size: ${fontSizes.h4};
+    margin: 0 0 ${fontSizes.textBase} 0;
+    line-height: ${lineHeights.h4};
+  }
 `

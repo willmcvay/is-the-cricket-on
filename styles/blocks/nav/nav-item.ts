@@ -1,14 +1,17 @@
 import styled from '../../styled-components'
-import { white, midBlue, blueGreen } from '../../base/variables/colors'
+import colors from '../../base/variables/colors'
 import { layoutBorderRadius, layoutHalf } from '../../base/variables/layout'
-import { desktop } from '../../base/variables/media-widths'
+import fontSizes from '../../base/variables/font-sizes'
+import mediaQueries from '../../base/variables/media-queries'
 
 const StyledNavItem = styled.div`
+  font-family: 'Rockwell', 'Helvetica', sans-serif;
+  font-size: ${fontSizes.textLarge};
   display: block;
   width: 100%;
   margin-bottom: ${layoutHalf};
 
-  @media only screen and (min-width: ${desktop}) {
+  ${mediaQueries.aboveDesktop} {
     margin-right: ${layoutHalf};
 
     &:last-child {
@@ -16,11 +19,15 @@ const StyledNavItem = styled.div`
     }
   }
 
+  ${mediaQueries.aboveTablet} {
+    font-size: ${fontSizes.textXLarge};
+  }
+
   a {
     text-decoration: none;
     cursor: pointer;
-    color: ${white};
-    background: ${midBlue};
+    color: ${colors.white};
+    background: ${colors.deepBlue};
     display: block;
     font-weight: bold;
     text-align: center;
@@ -28,7 +35,7 @@ const StyledNavItem = styled.div`
     padding: ${layoutHalf};
 
     &:hover:enabled {
-      background-color: ${blueGreen};
+      background-color: ${colors.salmon};
     }
 
     &:disabled {

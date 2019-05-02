@@ -1,6 +1,10 @@
-export const white = '#fff'
-export const black = '#313131'
-export const paleGrey = '#e3e3e3'
-export const midGrey = '#c9c9c9'
-export const blueGreen = '#9ad3de'
-export const midBlue = '#89bdd3'
+const colors = {
+  white: '#fff',
+  black: '#272726',
+  paleGrey: '#eceee9',
+  deepBlue: '#113e91',
+  gold: '#fecc52',
+  salmon: '#f75151'
+}
+
+export default colors

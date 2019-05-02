@@ -18,7 +18,7 @@ export const getChildProps = (props: Core.ApolloWrappedProps): HomePageProps | n
   return {
     ...upcomingMatchStats.meta,
     isThereCricketOn: inProgressMatchCount ? 'Yes' : 'No',
-    headerText: inProgressMatchCount ? ' there is cricket on.' : ' there is no cricket on.'
+    headerText: inProgressMatchCount ? '...there is cricket on' : '...there is no cricket on'
   }
 }
 

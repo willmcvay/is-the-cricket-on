@@ -1,6 +1,7 @@
 import { createGlobalStyle } from '../../styled-components'
 
-import { midGrey } from '../variables/colors'
+import colors from '../variables/colors'
+import mediaQueries from '../variables/media-queries'
 
 const GlobalStyle = createGlobalStyle`
   div,
@@ -130,16 +131,20 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-family: 'Marvel', 'Helvetica', sans-serif;
     line-height: 1;
-    font-size: 24px;
+    font-size: 16px;
     width: 100%;
     height: 100%;
   }
 
   body {
     width: auto;
-    padding: 1rem;
-    background: ${midGrey};
+    padding: 0.5rem;
+    background: ${colors.paleGrey};
     line-height: 1.2;
+
+    ${mediaQueries.aboveTablet} {
+      padding: 1rem;
+    }
   }
 `
 

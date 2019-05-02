@@ -1,23 +1,23 @@
 import styled from '../../styled-components'
-import { tablet, largeDesktop } from '../variables/media-widths'
-import { white } from '../variables/colors'
+import mediaQueries from '../variables/media-queries'
+import colors from '../variables/colors'
 import { layoutBorderRadius } from '../variables/layout'
 
 const PageContainer = styled.div`
   margin: 0 auto;
   display: flex;
-  background: ${white};
+  background: ${colors.white};
   padding: 1rem;
-  height: 90vh;
+  min-height: 90vh;
   max-width: 100%;
   border-radius: ${layoutBorderRadius};
-  overflow: scroll;
 
-  @media only screen and (min-width: ${tablet}) {
+  ${mediaQueries.aboveTablet} {
     max-width: 80%;
+    padding: 2rem;
   }
 
-  @media only screen and (min-width: ${largeDesktop}) {
+  ${mediaQueries.aboveDesktop} {
     max-width: 65%;
   }
 `
