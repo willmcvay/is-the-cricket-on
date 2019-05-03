@@ -9,31 +9,29 @@ import ScoreCardHeader from './scorecard-header'
 const ScorecardDetails = (props: Scorecard) => {
   if (!props.innings) return null
   return (
-    <React.Fragment>
-      <StyledHeader>
-        <StyledH4>Scorecard</StyledH4>
-        {props.innings.map(innings => (
-          <StyledGridWrapper key={innings.id} theme={{ gridColumns: '30% 30% 10% 10% 10% 5% 5%' }}>
-            <ScoreCardHeader />
-            {innings.batsmen &&
-              innings.batsmen.map(batsman => {
-                if (!batsman) return null
-                return (
-                  <React.Fragment key={batsman.id}>
-                    <StyledGridCell>{batsman.name}</StyledGridCell>
-                    <StyledGridCell>{batsman.howOut}</StyledGridCell>
-                    <StyledGridCell>{batsman.runs}</StyledGridCell>
-                    <StyledGridCell>{batsman.balls}</StyledGridCell>
-                    <StyledGridCell>{batsman.strikeRate}</StyledGridCell>
-                    <StyledGridCell>{batsman.fours}</StyledGridCell>
-                    <StyledGridCell>{batsman.sixes}</StyledGridCell>
-                  </React.Fragment>
-                )
-              })}
-          </StyledGridWrapper>
-        ))}
-      </StyledHeader>
-    </React.Fragment>
+    <StyledHeader>
+      <StyledH4>Scorecard</StyledH4>
+      {props.innings.map(innings => (
+        <StyledGridWrapper key={innings.id} theme={{ gridColumns: '25% 30% 10% 10% 15% 5% 5%' }}>
+          <ScoreCardHeader />
+          {innings.batsmen &&
+            innings.batsmen.map(batsman => {
+              if (!batsman) return null
+              return (
+                <React.Fragment key={batsman.id}>
+                  <StyledGridCell>{batsman.name}</StyledGridCell>
+                  <StyledGridCell>{batsman.howOut}</StyledGridCell>
+                  <StyledGridCell>{batsman.runs}</StyledGridCell>
+                  <StyledGridCell>{batsman.balls}</StyledGridCell>
+                  <StyledGridCell>{batsman.strikeRate}</StyledGridCell>
+                  <StyledGridCell>{batsman.fours}</StyledGridCell>
+                  <StyledGridCell>{batsman.sixes}</StyledGridCell>
+                </React.Fragment>
+              )
+            })}
+        </StyledGridWrapper>
+      ))}
+    </StyledHeader>
   )
 }
 

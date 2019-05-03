@@ -1,14 +1,13 @@
-import * as React from 'react'
+import React from 'react'
 import { Team } from '../../shared/types/queries'
 import StyledImage from '../../styles/base/elements/image'
-import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
-import { layoutQuadruple } from '../../styles/base/variables/layout'
+import StyledTeamItem from '../../styles/blocks/team/team-item'
 
 const TeamItem = ({ name, logoUrl }: Team) => (
-  <StyledGridWrapper theme={{ gridColumns: `${layoutQuadruple} 1fr` }}>
+  <StyledTeamItem>
     <StyledImage src={logoUrl || ''} />
     <span>{name}</span>
-  </StyledGridWrapper>
+  </StyledTeamItem>
 )
 
 export default TeamItem

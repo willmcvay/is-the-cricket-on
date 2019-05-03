@@ -16,7 +16,7 @@ export const StyledH1 = styled.h1<HeaderProps>`
   margin: -1rem -1rem ${fontSizes.textBase};
   text-align: ${props => (props.textCentered && 'center') || 'left'};
   line-height: ${lineHeights.h1Mob};
-  color: ${colors.white};
+  color: ${colors.gold};
   background: ${colors.deepBlue};
   border-radius: 5px 5px 0 0;
   padding: ${layoutBase};

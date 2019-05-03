@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { MATCH_DETAILS } from '../../shared/constants/routes'
 import { stringMapToQuery } from '../../shared/utils/data'
 import StyledA from '../../styles/base/elements/anchor'
-import { StyledH4 } from '../../styles/base/typeography/headings'
 import { withComma } from '../../shared/utils/text'
-import StyledGridWrapper from '../../styles/base/layout/grid-wrapper'
+import StyledMatchListItem from '../../styles/blocks/match/match-list-item'
 import StyledDivider from '../../styles/base/layout/divider'
+import StyledP from '../../styles/base/elements/paragraph'
 
 const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) => {
   const query = stringMapToQuery({
@@ -19,16 +19,16 @@ const MatchListItem = ({ id, name, homeTeam, awayTeam, series, venue }: Match) =
   return (
     <StyledDivider theme={{ size: 'FULL' }}>
       <Link prefetch href={`${MATCH_DETAILS}${query}`}>
-        <StyledA href={`${MATCH_DETAILS}${query}`}>
-          <StyledH4>
-            {withComma(name)}
-            {withComma(series.name)}
-            {venue.name}
-          </StyledH4>
-          <StyledGridWrapper theme={{ gridColumns: '50% 50%' }}>
+        <StyledA>
+          <StyledMatchListItem>
             <TeamItem {...homeTeam} />
             <TeamItem {...awayTeam} />
-          </StyledGridWrapper>
+          </StyledMatchListItem>
+          <StyledP>
+            {withComma(series.name)}
+            {withComma(name)}
+            {venue.name}
+          </StyledP>
         </StyledA>
       </Link>
     </StyledDivider>

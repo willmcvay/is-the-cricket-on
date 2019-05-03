@@ -3,18 +3,16 @@ import fontSizes from '../../base/variables/font-sizes'
 import mediaQueries from '../../base/variables/media-queries'
 import { layoutHalf, layoutBase } from '../../base/variables/layout'
 
-const StyledTeamScoreSummary = styled.div`
+const StyledTeamItem = styled.div`
   font-size: ${fontSizes.textLarge};
   font-family: 'Rockwell', Helvetica, sans-serif;
   font-weight: bold;
   display: flex;
   margin-bottom: ${layoutHalf};
   align-items: center;
-  flex-direction: row;
 
-  > section {
+  > span {
     padding-left: ${layoutBase};
-    margin-bottom: ${layoutHalf};
   }
 
   ${mediaQueries.aboveTablet} {
@@ -28,4 +26,4 @@ const StyledTeamScoreSummary = styled.div`
   }
 `
 
-export default StyledTeamScoreSummary
+export default StyledTeamItem

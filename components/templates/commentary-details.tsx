@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { oc } from 'ts-optchain'
 import { CommentaryInnings, CommentaryMeta } from '../../shared/types/queries'
 import { StyledH4 } from '../../styles/base/typeography/headings'
@@ -13,13 +13,13 @@ const CommentaryDetails = (props: CommentaryDetailsProps) => {
 
   if (!commentaryItem) return null
   return (
-    <React.Fragment>
+    <>
       <StyledH4>Commentary</StyledH4>
       {commentaryItem.map(item => {
         if (!item) return null
         return <StyledP key={item.id}>{item.text}</StyledP>
       })}
-    </React.Fragment>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { MATCH_LIST } from '../../shared/constants/routes'
 import { StyledH1, StyledH4 } from '../../styles/base/typeography/headings'
 import { pluralise } from '../../shared/utils/text'
@@ -17,7 +17,7 @@ export const HomePage = (props: HomePageProps) => {
   } = props
 
   return (
-    <React.Fragment>
+    <>
       <StyledHeader>
         <StyledH1>{isThereCricketOn}</StyledH1>
         <StyledH4>{headerText}</StyledH4>
@@ -54,7 +54,7 @@ export const HomePage = (props: HomePageProps) => {
           )} completed`}
         />
       </StyledNavBar>
-    </React.Fragment>
+    </>
   )
 }
 
